@@ -3,7 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -25,7 +25,7 @@ func main() {
 	defer resp.Body.Close()
 
 	if resp.StatusCode/100 != 2 {
-		b, err := ioutil.ReadAll(resp.Body)
+		b, err := io.ReadAll(resp.Body)
 		if err != nil {
 			log.Fatalln(err) //nolint: gocritic
 		}

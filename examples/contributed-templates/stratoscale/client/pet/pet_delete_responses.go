@@ -48,7 +48,8 @@ func NewPetDeleteNoContent() *PetDeleteNoContent {
 	return &PetDeleteNoContent{}
 }
 
-/* PetDeleteNoContent describes a response with status code 204, with default header values.
+/*
+	PetDeleteNoContent describes a response with status code 204, with default header values.
 
 Deleted successfully
 */
@@ -69,7 +70,8 @@ func NewPetDeleteBadRequest() *PetDeleteBadRequest {
 	return &PetDeleteBadRequest{}
 }
 
-/* PetDeleteBadRequest describes a response with status code 400, with default header values.
+/*
+	PetDeleteBadRequest describes a response with status code 400, with default header values.
 
 Invalid ID supplied
 */
@@ -90,7 +92,8 @@ func NewPetDeleteNotFound() *PetDeleteNotFound {
 	return &PetDeleteNotFound{}
 }
 
-/* PetDeleteNotFound describes a response with status code 404, with default header values.
+/*
+	PetDeleteNotFound describes a response with status code 404, with default header values.
 
 Pet not found
 */

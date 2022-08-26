@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"log"
 	"math"
 	"os"
 	"path"
@@ -16,8 +16,6 @@ import (
 	"text/template"
 	"text/template/parse"
 	"unicode"
-
-	"log"
 
 	"github.com/go-openapi/inflect"
 	"github.com/go-openapi/runtime"
@@ -336,7 +334,7 @@ func (t *Repository) LoadDir(templatePath string) error {
 
 		if strings.HasSuffix(path, ".gotmpl") {
 			if assetName, e := filepath.Rel(templatePath, path); e == nil {
-				if data, e := ioutil.ReadFile(path); e == nil {
+				if data, e := os.ReadFile(path); e == nil {
 					if ee := t.AddFile(assetName, string(data)); ee != nil {
 						return fmt.Errorf("could not add template: %v", ee)
 					}

@@ -54,7 +54,8 @@ func NewListTasksOK() *ListTasksOK {
 	return &ListTasksOK{}
 }
 
-/* ListTasksOK describes a response with status code 200, with default header values.
+/*
+	ListTasksOK describes a response with status code 200, with default header values.
 
 Successful response
 */
@@ -102,7 +103,8 @@ func NewListTasksUnprocessableEntity() *ListTasksUnprocessableEntity {
 	return &ListTasksUnprocessableEntity{}
 }
 
-/* ListTasksUnprocessableEntity describes a response with status code 422, with default header values.
+/*
+	ListTasksUnprocessableEntity describes a response with status code 422, with default header values.
 
 Validation error
 */
@@ -136,7 +138,8 @@ func NewListTasksDefault(code int) *ListTasksDefault {
 	}
 }
 
-/* ListTasksDefault describes a response with status code -1, with default header values.
+/*
+	ListTasksDefault describes a response with status code -1, with default header values.
 
 Error response
 */

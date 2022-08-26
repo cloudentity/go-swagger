@@ -17,7 +17,6 @@ package generator
 import (
 	"bytes"
 	"errors"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"testing"
@@ -1165,7 +1164,7 @@ func TestGenerateServerOperation(t *testing.T) {
 
 	fname := "../fixtures/codegen/todolist.simple.yml"
 
-	tgt, _ := ioutil.TempDir(filepath.Dir(fname), "generated")
+	tgt, _ := os.MkdirTemp(filepath.Dir(fname), "generated")
 	defer func() {
 		_ = os.RemoveAll(tgt)
 	}()
@@ -1425,7 +1424,7 @@ func TestGenServer_2161_panic(t *testing.T) {
 	t.Parallel()
 	defer discardOutput()()
 
-	generated, err := ioutil.TempDir(testCwd(t), "generated_2161")
+	generated, err := os.MkdirTemp(testCwd(t), "generated_2161")
 	require.NoError(t, err)
 
 	defer func() {

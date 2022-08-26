@@ -47,7 +47,8 @@ func NewElapseOK(writer io.Writer) *ElapseOK {
 	}
 }
 
-/* ElapseOK describes a response with status code 200, with default header values.
+/*
+	ElapseOK describes a response with status code 200, with default header values.
 
 Secondly update on remaining time
 */
@@ -77,7 +78,8 @@ func NewElapseForbidden() *ElapseForbidden {
 	return &ElapseForbidden{}
 }
 
-/* ElapseForbidden describes a response with status code 403, with default header values.
+/*
+	ElapseForbidden describes a response with status code 403, with default header values.
 
 Contrived - thrown when length of 11 is chosen
 */
