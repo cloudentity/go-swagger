@@ -670,7 +670,7 @@ func TestInterfaceField(t *testing.T) {
 	require.NoError(t, prs.Build(models))
 
 	schema := models["Interfaced"]
-	assertProperty(t, &schema, "", "custom_data", "", "CustomData")
+	assertProperty(t, &schema, "object", "custom_data", "", "CustomData")
 }
 
 func TestAliasedTypes(t *testing.T) {
@@ -831,21 +831,6 @@ func TestEmbeddedAllOf(t *testing.T) {
 	assertProperty(t, &asch, "string", "createdAt", "date-time", "CreatedAt")
 	assertProperty(t, &asch, "integer", "did", "int64", "DID")
 	assertProperty(t, &asch, "string", "cat", "", "Cat")
-}
-
-func TestSwaggerTypeNamed(t *testing.T) {
-	sctx := loadClassificationPkgsCtx(t)
-	decl := getClassificationModel(sctx, "NamedWithType")
-	require.NotNil(t, decl)
-	prs := &schemaBuilder{
-		ctx:  sctx,
-		decl: decl,
-	}
-	models := make(map[string]spec.Schema)
-	require.NoError(t, prs.Build(models))
-	schema := models["namedWithType"]
-
-	assertProperty(t, &schema, "object", "some_map", "", "SomeMap")
 }
 
 func TestSwaggerTypeStruct(t *testing.T) {
