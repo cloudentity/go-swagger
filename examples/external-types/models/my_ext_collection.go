@@ -11,7 +11,7 @@ import (
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/strfmt"
-	go_ext "github.com/go-swagger/go-swagger/examples/external-types/go-ext"
+	go_ext "github.com/cloudentity/go-swagger/examples/external-types/go-ext"
 )
 
 // MyExtCollection This type demonstrates the import generation with name mangling

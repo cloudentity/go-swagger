@@ -110,4 +110,4 @@ Content-Length: 47
 {"code":401,"message":"incorrect api key auth"}
 ```
 
-[example_code]: https://github.com/go-swagger/go-swagger/tree/master/examples/authentication
+[example_code]: https://github.com/cloudentity/go-swagger/tree/master/examples/authentication

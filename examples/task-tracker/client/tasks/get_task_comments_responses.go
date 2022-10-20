@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/go-swagger/go-swagger/examples/task-tracker/models"
+	"github.com/cloudentity/go-swagger/examples/task-tracker/models"
 )
 
 // GetTaskCommentsReader is a Reader for the GetTaskComments structure.
