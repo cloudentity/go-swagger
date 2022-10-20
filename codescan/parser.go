@@ -250,8 +250,6 @@ func swaggerSchemaForType(typeName string, prop swaggerTypable) error {
 		prop.Typed("integer", "uint8")
 	case "uintptr":
 		prop.Typed("integer", "uint64")
-	case "object":
-		prop.Typed("object", "")
 	default:
 		return fmt.Errorf("unsupported type %q", typeName)
 	}

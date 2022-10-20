@@ -12,10 +12,9 @@ import (
 	"strconv"
 	"strings"
 
-	"golang.org/x/tools/go/ast/astutil"
-
 	"github.com/go-openapi/spec"
 	"github.com/pkg/errors"
+	"golang.org/x/tools/go/ast/astutil"
 )
 
 func addExtension(ve *spec.VendorExtensible, key string, value interface{}) {
@@ -356,11 +355,6 @@ func (s *schemaBuilder) buildFromType(tpe types.Type, tgt swaggerTypable) error 
 			cmt = new(ast.CommentGroup)
 		}
 
-		if typeName, ok := typeName(cmt); ok {
-			_ = swaggerSchemaForType(typeName, tgt)
-			return nil
-		}
-
 		switch utitpe := tpe.Underlying().(type) {
 		case *types.Struct:
 
@@ -493,6 +487,7 @@ func (s *schemaBuilder) buildFromType(tpe types.Type, tgt swaggerTypable) error 
 
 func (s *schemaBuilder) buildFromInterface(decl *entityDecl, it *types.Interface, schema *spec.Schema, seen map[string]string) error {
 	if it.Empty() {
+		schema.Typed("object", "")
 		return nil
 	}
 

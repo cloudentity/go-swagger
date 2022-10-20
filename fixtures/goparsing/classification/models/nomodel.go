@@ -18,8 +18,8 @@ import (
 	"net/url"
 	"time"
 
-	"github.com/go-openapi/strfmt"
 	"github.com/cloudentity/go-swagger/fixtures/goparsing/classification/transitive/mods"
+	"github.com/go-openapi/strfmt"
 )
 
 // NoModel is a struct without an annotation.
@@ -752,12 +752,4 @@ type TextMarshalModel struct {
 	StructStrfmt    MarshalTextStructStrfmt     `json:"structStrfmt"`
 	StructStrfmtPtr *MarshalTextStructStrfmtPtr `json:"structStrfmtPtr"`
 	CustomURL       URL                         `json:"customUrl"`
-}
-
-// swagger:type object
-type SomeObjectMap interface{}
-
-// swagger:model namedWithType
-type NamedWithType struct {
-	SomeMap SomeObjectMap `json:"some_map"`
 }
