@@ -78,7 +78,7 @@ Help Options:
 ```
 
 ### Build a CLI
-There is an example cli and tutorial provided at: https://github.com/go-swagger/go-swagger/tree/master/examples/cli
+There is an example cli and tutorial provided at: https://github.com/cloudentity/go-swagger/tree/master/examples/cli
 
 To generate a CLI:
 ```
@@ -100,4 +100,4 @@ See details of the generated app help message for usage
 <app name> help
 ```
 
-A more detailed/complicated example is generated CLI for docker engine: https://github.com/go-swagger/dockerctl
+A more detailed/complicated example is generated CLI for docker engine: https://github.com/cloudentity/dockerctl

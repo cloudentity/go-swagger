@@ -5,11 +5,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com/go-swagger/go-swagger/codescan"
+	"github.com/cloudentity/go-swagger/codescan"
 
-	"github.com/jessevdk/go-flags"
 	"github.com/stretchr/testify/assert"
-	"gopkg.in/yaml.v3"
 )
 
 const (

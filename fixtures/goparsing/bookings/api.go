@@ -19,7 +19,7 @@ package booking
 import (
 	"net/http"
 
-	"github.com/go-swagger/scan-repo-boundary/makeplans"
+	"github.com/cloudentity/scan-repo-boundary/makeplans"
 )
 
 // Customer of the site.

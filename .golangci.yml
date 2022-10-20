@@ -14,7 +14,7 @@ linters-settings:
   gocyclo:
     min-complexity: 25
   goimports:
-    local-prefixes: github.com/go-swagger/go-swagger
+    local-prefixes: github.com/cloudentity/go-swagger
   golint:
     min-confidence: 0
   govet:

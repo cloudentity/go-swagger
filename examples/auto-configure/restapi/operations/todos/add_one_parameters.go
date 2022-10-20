@@ -14,7 +14,7 @@ import (
 	"github.com/go-openapi/runtime/middleware"
 	"github.com/go-openapi/validate"
 
-	"github.com/go-swagger/go-swagger/examples/auto-configure/models"
+	"github.com/cloudentity/go-swagger/examples/auto-configure/models"
 )
 
 // NewAddOneParams creates a new AddOneParams object

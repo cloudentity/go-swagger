@@ -5,7 +5,7 @@ Generate a command line client tool for your server
 * Generated CLI code is a wrapper of the generated client code, which reads command line options and args to construct appropriate parameters and send to the server.
 * Based on [cobra framework](https://github.com/spf13/cobra), and [viper](https://github.com/spf13/viper).
 * Support shell completions.
-* For advanced example, see [dockerctl](https://github.com/go-swagger/dockerctl), a CLI generated using this for [docker engine](https://www.docker.com/)
+* For advanced example, see [dockerctl](https://github.com/cloudentity/dockerctl), a CLI generated using this for [docker engine](https://www.docker.com/)
 ## General Command Layout
 * Root command manages global flags
 * Each open-api tag is a sub-command under root command. In go-swagger it is called operation group.
