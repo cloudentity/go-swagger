@@ -12,7 +12,7 @@ import (
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/strfmt"
 
-	"github.com/go-swagger/go-swagger/examples/contributed-templates/stratoscale/models"
+	"github.com/cloudentity/go-swagger/examples/contributed-templates/stratoscale/models"
 )
 
 // PetListReader is a Reader for the PetList structure.

@@ -5,7 +5,7 @@ installation, see [the prerequisites](https://goswagger.io/generate/requirements
 
 ## Installing from binary distributions
 
-go-swagger releases are distributed as binaries that are built from signed tags. It is published [as github release](https://github.com/go-swagger/go-swagger/tags),
+go-swagger releases are distributed as binaries that are built from signed tags. It is published [as github release](https://github.com/cloudentity/go-swagger/tags),
 rpm, deb and docker image.
 
 ### Docker image [![Docker Repository on Quay](https://quay.io/repository/goswagger/swagger/status "Docker Repository on Quay")](https://quay.io/repository/goswagger/swagger)
@@ -47,7 +47,7 @@ brew install go-swagger
 ### Static binary
 
 You can download a binary for your platform from github:
-<https://github.com/go-swagger/go-swagger/releases/latest>
+<https://github.com/cloudentity/go-swagger/releases/latest>
 
 ```
 download_url=$(curl -s https://api.github.com/repos/go-swagger/go-swagger/releases/latest | \
@@ -83,7 +83,7 @@ Install or update from current source master:
 
 ```
 dir=$(mktemp -d) 
-git clone https://github.com/go-swagger/go-swagger "$dir" 
+git clone https://github.com/cloudentity/go-swagger "$dir" 
 cd "$dir"
 go install ./cmd/swagger
 ```
@@ -92,15 +92,15 @@ To install a specific version from source an appropriate tag needs to be checked
 
 ```
 dir=$(mktemp -d)
-git clone https://github.com/go-swagger/go-swagger "$dir" 
+git clone https://github.com/cloudentity/go-swagger "$dir" 
 cd "$dir"
 git checkout v0.25.0
-go install -ldflags "-X github.com/go-swagger/go-swagger/cmd/swagger/commands.Version=$(git describe --tags) -X github.com/go-swagger/go-swagger/cmd/swagger/commands.Commit=$(git rev-parse HEAD)" ./cmd/swagger
+go install -ldflags "-X github.com/cloudentity/go-swagger/cmd/swagger/commands.Version=$(git describe --tags) -X github.com/cloudentity/go-swagger/cmd/swagger/commands.Commit=$(git rev-parse HEAD)" ./cmd/swagger
 ```
 
 You are welcome to clone this repo and start contributing:
 ```
-git clone https://github.com/go-swagger/go-swagger
+git clone https://github.com/cloudentity/go-swagger
 ```
 
 > **NOTE**: go-swagger works on *nix as well as Windows OS 

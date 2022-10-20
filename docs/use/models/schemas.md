@@ -691,7 +691,7 @@ func (m *Kennel) SetPets(val []Pet) {
 
 > **NOTE**: this representation with unexported fields for references to base types might be subject to change in
 > the future, as it is not consistent in all cases. If you are intested to participate this design work,
-> feel free to comment and express your views [here](https://github.com/go-swagger/go-swagger/issues/232).
+> feel free to comment and express your views [here](https://github.com/cloudentity/go-swagger/issues/232).
 
 #### Factories for base types
 
@@ -1057,7 +1057,7 @@ definitions:
     x-go-type:
       type: Hotspot
       import:
-        package: github.com/go-swagger/go-swagger/fixtures/enhancements/2224/external
+        package: github.com/cloudentity/go-swagger/fixtures/enhancements/2224/external
       hints:
         kind: object
     x-nullable: true
@@ -1333,9 +1333,9 @@ type ObjectWithDescription struct {
 [Validatable]: https://github.com/go-openapi/runtime/blob/master/interfaces.go#L101
 [validate]: https://github.com/go-openapi/validate
 [validate-json]: https://godoc.org/github.com/go-openapi/validate#ex-AgainstSchema
-[go-doc-model]: https://godoc.org/github.com/go-swagger/go-swagger/examples/generated/models
+[go-doc-model]: https://godoc.org/github.com/cloudentity/go-swagger/examples/generated/models
 [read-only]: https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#fixed-fields-13
 [all-formats]:  https://github.com/go-openapi/strfmt/blob/master/README.md
 [easy-json]: https://github.com/mailru/easyjson
 [json-schema]: https://tools.ietf.org/html/draft-fge-json-schema-validation-00
-[lifting-pointers]: https://github.com/go-swagger/go-swagger/pull/557
+[lifting-pointers]: https://github.com/cloudentity/go-swagger/pull/557

@@ -10,8 +10,8 @@ RUN apk --no-cache add ca-certificates shared-mime-info mailcap git build-base
 
 RUN mkdir -p bin &&\
   LDFLAGS="-linkmode external -extldflags \"-static\"" &&\
-  LDFLAGS="$LDFLAGS -X github.com/go-swagger/go-swagger/cmd/swagger/commands.Commit=${commit_hash}" &&\
-  LDFLAGS="$LDFLAGS -X github.com/go-swagger/go-swagger/cmd/swagger/commands.Version=${tag_name}" &&\
+  LDFLAGS="$LDFLAGS -X github.com/cloudentity/go-swagger/cmd/swagger/commands.Commit=${commit_hash}" &&\
+  LDFLAGS="$LDFLAGS -X github.com/cloudentity/go-swagger/cmd/swagger/commands.Version=${tag_name}" &&\
   go build -o bin/swagger -ldflags "$LDFLAGS" -a ./cmd/swagger
 
 FROM golang:alpine

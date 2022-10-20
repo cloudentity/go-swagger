@@ -29,7 +29,7 @@ before_test:
 test_script:
   # sanity test: basic build on windows works
   - set PATH=%GOPATH%\bin;%PATH%
-  - go install github.com/go-swagger/go-swagger/cmd/swagger
+  - go install github.com/cloudentity/go-swagger/cmd/swagger
   - swagger validate fixtures/bugs/2493/fixture-2492.json
   - swagger validate fixtures/bugs/2493/fixture-2493.json
   - swagger validate fixtures/bugs/2493/fixture-2492.yaml
