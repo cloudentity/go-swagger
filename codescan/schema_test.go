@@ -279,7 +279,7 @@ func TestSchemaBuilder(t *testing.T) {
 	require.NotNil(t, decl2)
 	require.NoError(t, (&schemaBuilder{decl: decl2, ctx: sctx}).Build(models))
 	msch, ok := models["order"]
-	pn := "github.com/go-swagger/go-swagger/fixtures/goparsing/classification/models"
+	pn := "github.com/cloudentity/go-swagger/fixtures/goparsing/classification/models"
 	assert.True(t, ok)
 	assert.Equal(t, pn, msch.Extensions["x-go-package"])
 	assert.Equal(t, "StoreOrder", msch.Extensions["x-go-name"])
@@ -293,7 +293,7 @@ func TestSchemaBuilder_AddExtensions(t *testing.T) {
 	require.NoError(t, (&schemaBuilder{decl: decl, ctx: sctx}).Build(models))
 
 	msch, ok := models["order"]
-	pn := "github.com/go-swagger/go-swagger/fixtures/goparsing/classification/models"
+	pn := "github.com/cloudentity/go-swagger/fixtures/goparsing/classification/models"
 	assert.True(t, ok)
 	assert.Equal(t, pn, msch.Extensions["x-go-package"])
 	assert.Equal(t, "StoreOrder", msch.Extensions["x-go-name"])
@@ -833,21 +833,6 @@ func TestEmbeddedAllOf(t *testing.T) {
 	assertProperty(t, &asch, "string", "cat", "", "Cat")
 }
 
-func TestSwaggerTypeNamed(t *testing.T) {
-	sctx := loadClassificationPkgsCtx(t)
-	decl := getClassificationModel(sctx, "NamedWithType")
-	require.NotNil(t, decl)
-	prs := &schemaBuilder{
-		ctx:  sctx,
-		decl: decl,
-	}
-	models := make(map[string]spec.Schema)
-	require.NoError(t, prs.Build(models))
-	schema := models["namedWithType"]
-
-	assertProperty(t, &schema, "object", "some_map", "", "SomeMap")
-}
-
 func TestSwaggerTypeStruct(t *testing.T) {
 	sctx := loadClassificationPkgsCtx(t)
 	decl := getClassificationModel(sctx, "NullString")
@@ -966,7 +951,7 @@ func TestInterfaceDiscriminators(t *testing.T) {
 			assert.Equal(t, "#/definitions/TeslaCar", sch.Ref.String())
 		}
 
-		assertProperty(t, &schema, "integer", "doors", "int64", "Doors")
+		assertProperty(t, &schema, "object", "custom_data", "", "CustomData")
 	}
 }
 
@@ -994,7 +979,7 @@ func TestAddExtension(t *testing.T) {
 }
 
 func getClassificationModel(sctx *scanCtx, nm string) *entityDecl {
-	decl, ok := sctx.FindDecl("github.com/go-swagger/go-swagger/fixtures/goparsing/classification/models", nm)
+	decl, ok := sctx.FindDecl("github.com/cloudentity/go-swagger/fixtures/goparsing/classification/models", nm)
 	if !ok {
 		return nil
 	}

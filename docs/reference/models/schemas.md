@@ -761,7 +761,7 @@ Models may also be generated once, customized manually, then reused in spec as e
 
 The extension annotation to declare an external type is `x-go-type`.
 
-A complete example is provided [here](https://github.com/go-swagger/go-swagger/tree/master/examples/external-types)
+A complete example is provided [here](https://github.com/cloudentity/go-swagger/tree/master/examples/external-types)
 to illustrate the different capabilities to inject custom types.
 
 

@@ -4,7 +4,7 @@
 package generate
 
 import (
-	"github.com/go-swagger/go-swagger/generator"
+	"github.com/cloudentity/go-swagger/generator"
 	"github.com/jessevdk/go-flags"
 )
 
