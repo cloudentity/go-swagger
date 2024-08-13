@@ -753,11 +753,3 @@ type TextMarshalModel struct {
 	StructStrfmtPtr *MarshalTextStructStrfmtPtr `json:"structStrfmtPtr"`
 	CustomURL       URL                         `json:"customUrl"`
 }
-
-// swagger:type object
-type SomeObjectMap interface{}
-
-// swagger:model namedWithType
-type NamedWithType struct {
-	SomeMap SomeObjectMap `json:"some_map"`
-}

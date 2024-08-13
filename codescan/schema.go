@@ -354,11 +354,6 @@ func (s *schemaBuilder) buildFromType(tpe types.Type, tgt swaggerTypable) error 
 			cmt = new(ast.CommentGroup)
 		}
 
-		if typeName, ok := typeName(cmt); ok {
-			_ = swaggerSchemaForType(typeName, tgt)
-			return nil
-		}
-
 		if s.decl.Spec.Assign.IsValid() {
 			return s.buildFromType(titpe.Underlying(), tgt)
 		}
@@ -476,6 +471,7 @@ func (s *schemaBuilder) buildFromType(tpe types.Type, tgt swaggerTypable) error 
 
 func (s *schemaBuilder) buildFromInterface(decl *entityDecl, it *types.Interface, schema *spec.Schema, seen map[string]string) error {
 	if it.Empty() {
+		schema.Typed("object", "")
 		return nil
 	}
 
