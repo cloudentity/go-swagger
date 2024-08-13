@@ -298,7 +298,6 @@ func TestSchemaBuilder_AddExtensions(t *testing.T) {
 	assert.Equal(t, pn, msch.Extensions["x-go-package"])
 	assert.Equal(t, "StoreOrder", msch.Extensions["x-go-name"])
 	assert.Equal(t, "StoreOrder represents an order in this application.", msch.Title)
-
 }
 
 func TestTextMarhalCustomType(t *testing.T) {
@@ -881,7 +880,7 @@ func TestStructDiscriminators(t *testing.T) {
 	schema := models["animal"]
 
 	assert.Equal(t, "BaseStruct", schema.Extensions["x-go-name"])
-	assert.Equal(t, schema.Discriminator, "jsonClass")
+	assert.Equal(t, "jsonClass", schema.Discriminator)
 
 	sch := models["gazelle"]
 	assert.Len(t, sch.AllOf, 2)
@@ -901,7 +900,6 @@ func TestStructDiscriminators(t *testing.T) {
 
 	// b, _ := json.MarshalIndent(sch, "", "  ")
 	// fmt.Println(string(b))
-
 }
 
 func TestInterfaceDiscriminators(t *testing.T) {
@@ -992,7 +990,7 @@ func TestAddExtension(t *testing.T) {
 	value3 := "Spec"
 	_ = os.Setenv("SWAGGER_GENERATE_EXTENSION", "false")
 	addExtension(ve, key3, value3)
-	assert.Equal(t, nil, ve.Extensions[key3])
+	assert.Nil(t, ve.Extensions[key3])
 }
 
 func getClassificationModel(sctx *scanCtx, nm string) *entityDecl {
@@ -1028,7 +1026,7 @@ func assertProperty(t testing.TB, schema *spec.Schema, typeName, jsonName, forma
 		assert.Equal(t, typeName, schema.Properties[jsonName].Type[0])
 	}
 	if goName == "" {
-		assert.Equal(t, nil, schema.Properties[jsonName].Extensions["x-go-name"])
+		assert.Nil(t, schema.Properties[jsonName].Extensions["x-go-name"])
 	} else {
 		assert.Equal(t, goName, schema.Properties[jsonName].Extensions["x-go-name"])
 	}
@@ -1044,7 +1042,6 @@ func assertRef(t testing.TB, schema *spec.Schema, jsonName, _, fragment string) 
 func assertDefinition(t testing.TB, defs map[string]spec.Schema, defName, typeName, formatName, goName string) {
 	schema, ok := defs[defName]
 	if assert.True(t, ok) {
-
 		if assert.NotEmpty(t, schema.Type) {
 			assert.Equal(t, typeName, schema.Type[0])
 			if goName != "" {

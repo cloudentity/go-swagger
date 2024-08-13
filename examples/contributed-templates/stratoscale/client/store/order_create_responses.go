@@ -6,6 +6,7 @@ package store
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -36,7 +37,7 @@ func (o *OrderCreateReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /store/order] OrderCreate", response, response.Code())
 	}
 }
 
@@ -46,7 +47,7 @@ func NewOrderCreateOK() *OrderCreateOK {
 }
 
 /*
-	OrderCreateOK describes a response with status code 200, with default header values.
+OrderCreateOK describes a response with status code 200, with default header values.
 
 successful operation
 */
@@ -54,37 +55,44 @@ type OrderCreateOK struct {
 	Payload *models.Order
 }
 
-// IsSuccess returns true when this order create o k response returns a 2xx status code
+// IsSuccess returns true when this order create o k response has a 2xx status code
 func (o *OrderCreateOK) IsSuccess() bool {
 	return true
 }
 
-// IsRedirect returns true when this order create o k response returns a 3xx status code
+// IsRedirect returns true when this order create o k response has a 3xx status code
 func (o *OrderCreateOK) IsRedirect() bool {
 	return false
 }
 
-// IsClientError returns true when this order create o k response returns a 4xx status code
+// IsClientError returns true when this order create o k response has a 4xx status code
 func (o *OrderCreateOK) IsClientError() bool {
 	return false
 }
 
-// IsServerError returns true when this order create o k response returns a 5xx status code
+// IsServerError returns true when this order create o k response has a 5xx status code
 func (o *OrderCreateOK) IsServerError() bool {
 	return false
 }
 
-// IsCode returns true when this order create o k response returns a 4xx status code
+// IsCode returns true when this order create o k response a status code equal to that given
 func (o *OrderCreateOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the order create o k response
+func (o *OrderCreateOK) Code() int {
+	return 200
+}
+
 func (o *OrderCreateOK) Error() string {
-	return fmt.Sprintf("[POST /store/order][%d] orderCreateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /store/order][%d] orderCreateOK %s", 200, payload)
 }
 
 func (o *OrderCreateOK) String() string {
-	return fmt.Sprintf("[POST /store/order][%d] orderCreateOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /store/order][%d] orderCreateOK %s", 200, payload)
 }
 
 func (o *OrderCreateOK) GetPayload() *models.Order {
@@ -109,44 +117,49 @@ func NewOrderCreateBadRequest() *OrderCreateBadRequest {
 }
 
 /*
-	OrderCreateBadRequest describes a response with status code 400, with default header values.
+OrderCreateBadRequest describes a response with status code 400, with default header values.
 
 Invalid Order
 */
 type OrderCreateBadRequest struct {
 }
 
-// IsSuccess returns true when this order create bad request response returns a 2xx status code
+// IsSuccess returns true when this order create bad request response has a 2xx status code
 func (o *OrderCreateBadRequest) IsSuccess() bool {
 	return false
 }
 
-// IsRedirect returns true when this order create bad request response returns a 3xx status code
+// IsRedirect returns true when this order create bad request response has a 3xx status code
 func (o *OrderCreateBadRequest) IsRedirect() bool {
 	return false
 }
 
-// IsClientError returns true when this order create bad request response returns a 4xx status code
+// IsClientError returns true when this order create bad request response has a 4xx status code
 func (o *OrderCreateBadRequest) IsClientError() bool {
 	return true
 }
 
-// IsServerError returns true when this order create bad request response returns a 5xx status code
+// IsServerError returns true when this order create bad request response has a 5xx status code
 func (o *OrderCreateBadRequest) IsServerError() bool {
 	return false
 }
 
-// IsCode returns true when this order create bad request response returns a 4xx status code
+// IsCode returns true when this order create bad request response a status code equal to that given
 func (o *OrderCreateBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the order create bad request response
+func (o *OrderCreateBadRequest) Code() int {
+	return 400
+}
+
 func (o *OrderCreateBadRequest) Error() string {
-	return fmt.Sprintf("[POST /store/order][%d] orderCreateBadRequest ", 400)
+	return fmt.Sprintf("[POST /store/order][%d] orderCreateBadRequest", 400)
 }
 
 func (o *OrderCreateBadRequest) String() string {
-	return fmt.Sprintf("[POST /store/order][%d] orderCreateBadRequest ", 400)
+	return fmt.Sprintf("[POST /store/order][%d] orderCreateBadRequest", 400)
 }
 
 func (o *OrderCreateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

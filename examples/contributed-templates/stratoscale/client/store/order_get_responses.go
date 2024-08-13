@@ -6,6 +6,7 @@ package store
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -42,7 +43,7 @@ func (o *OrderGetReader) ReadResponse(response runtime.ClientResponse, consumer 
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /store/order/{orderId}] OrderGet", response, response.Code())
 	}
 }
 
@@ -52,7 +53,7 @@ func NewOrderGetOK() *OrderGetOK {
 }
 
 /*
-	OrderGetOK describes a response with status code 200, with default header values.
+OrderGetOK describes a response with status code 200, with default header values.
 
 successful operation
 */
@@ -60,37 +61,44 @@ type OrderGetOK struct {
 	Payload *models.Order
 }
 
-// IsSuccess returns true when this order get o k response returns a 2xx status code
+// IsSuccess returns true when this order get o k response has a 2xx status code
 func (o *OrderGetOK) IsSuccess() bool {
 	return true
 }
 
-// IsRedirect returns true when this order get o k response returns a 3xx status code
+// IsRedirect returns true when this order get o k response has a 3xx status code
 func (o *OrderGetOK) IsRedirect() bool {
 	return false
 }
 
-// IsClientError returns true when this order get o k response returns a 4xx status code
+// IsClientError returns true when this order get o k response has a 4xx status code
 func (o *OrderGetOK) IsClientError() bool {
 	return false
 }
 
-// IsServerError returns true when this order get o k response returns a 5xx status code
+// IsServerError returns true when this order get o k response has a 5xx status code
 func (o *OrderGetOK) IsServerError() bool {
 	return false
 }
 
-// IsCode returns true when this order get o k response returns a 4xx status code
+// IsCode returns true when this order get o k response a status code equal to that given
 func (o *OrderGetOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the order get o k response
+func (o *OrderGetOK) Code() int {
+	return 200
+}
+
 func (o *OrderGetOK) Error() string {
-	return fmt.Sprintf("[GET /store/order/{orderId}][%d] orderGetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /store/order/{orderId}][%d] orderGetOK %s", 200, payload)
 }
 
 func (o *OrderGetOK) String() string {
-	return fmt.Sprintf("[GET /store/order/{orderId}][%d] orderGetOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /store/order/{orderId}][%d] orderGetOK %s", 200, payload)
 }
 
 func (o *OrderGetOK) GetPayload() *models.Order {
@@ -115,44 +123,49 @@ func NewOrderGetBadRequest() *OrderGetBadRequest {
 }
 
 /*
-	OrderGetBadRequest describes a response with status code 400, with default header values.
+OrderGetBadRequest describes a response with status code 400, with default header values.
 
 Invalid ID supplied
 */
 type OrderGetBadRequest struct {
 }
 
-// IsSuccess returns true when this order get bad request response returns a 2xx status code
+// IsSuccess returns true when this order get bad request response has a 2xx status code
 func (o *OrderGetBadRequest) IsSuccess() bool {
 	return false
 }
 
-// IsRedirect returns true when this order get bad request response returns a 3xx status code
+// IsRedirect returns true when this order get bad request response has a 3xx status code
 func (o *OrderGetBadRequest) IsRedirect() bool {
 	return false
 }
 
-// IsClientError returns true when this order get bad request response returns a 4xx status code
+// IsClientError returns true when this order get bad request response has a 4xx status code
 func (o *OrderGetBadRequest) IsClientError() bool {
 	return true
 }
 
-// IsServerError returns true when this order get bad request response returns a 5xx status code
+// IsServerError returns true when this order get bad request response has a 5xx status code
 func (o *OrderGetBadRequest) IsServerError() bool {
 	return false
 }
 
-// IsCode returns true when this order get bad request response returns a 4xx status code
+// IsCode returns true when this order get bad request response a status code equal to that given
 func (o *OrderGetBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the order get bad request response
+func (o *OrderGetBadRequest) Code() int {
+	return 400
+}
+
 func (o *OrderGetBadRequest) Error() string {
-	return fmt.Sprintf("[GET /store/order/{orderId}][%d] orderGetBadRequest ", 400)
+	return fmt.Sprintf("[GET /store/order/{orderId}][%d] orderGetBadRequest", 400)
 }
 
 func (o *OrderGetBadRequest) String() string {
-	return fmt.Sprintf("[GET /store/order/{orderId}][%d] orderGetBadRequest ", 400)
+	return fmt.Sprintf("[GET /store/order/{orderId}][%d] orderGetBadRequest", 400)
 }
 
 func (o *OrderGetBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -166,44 +179,49 @@ func NewOrderGetNotFound() *OrderGetNotFound {
 }
 
 /*
-	OrderGetNotFound describes a response with status code 404, with default header values.
+OrderGetNotFound describes a response with status code 404, with default header values.
 
 Order not found
 */
 type OrderGetNotFound struct {
 }
 
-// IsSuccess returns true when this order get not found response returns a 2xx status code
+// IsSuccess returns true when this order get not found response has a 2xx status code
 func (o *OrderGetNotFound) IsSuccess() bool {
 	return false
 }
 
-// IsRedirect returns true when this order get not found response returns a 3xx status code
+// IsRedirect returns true when this order get not found response has a 3xx status code
 func (o *OrderGetNotFound) IsRedirect() bool {
 	return false
 }
 
-// IsClientError returns true when this order get not found response returns a 4xx status code
+// IsClientError returns true when this order get not found response has a 4xx status code
 func (o *OrderGetNotFound) IsClientError() bool {
 	return true
 }
 
-// IsServerError returns true when this order get not found response returns a 5xx status code
+// IsServerError returns true when this order get not found response has a 5xx status code
 func (o *OrderGetNotFound) IsServerError() bool {
 	return false
 }
 
-// IsCode returns true when this order get not found response returns a 4xx status code
+// IsCode returns true when this order get not found response a status code equal to that given
 func (o *OrderGetNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the order get not found response
+func (o *OrderGetNotFound) Code() int {
+	return 404
+}
+
 func (o *OrderGetNotFound) Error() string {
-	return fmt.Sprintf("[GET /store/order/{orderId}][%d] orderGetNotFound ", 404)
+	return fmt.Sprintf("[GET /store/order/{orderId}][%d] orderGetNotFound", 404)
 }
 
 func (o *OrderGetNotFound) String() string {
-	return fmt.Sprintf("[GET /store/order/{orderId}][%d] orderGetNotFound ", 404)
+	return fmt.Sprintf("[GET /store/order/{orderId}][%d] orderGetNotFound", 404)
 }
 
 func (o *OrderGetNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

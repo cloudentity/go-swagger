@@ -6,6 +6,7 @@ package pet
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -48,7 +49,7 @@ func (o *PetUpdateReader) ReadResponse(response runtime.ClientResponse, consumer
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[PUT /pet] PetUpdate", response, response.Code())
 	}
 }
 
@@ -58,7 +59,7 @@ func NewPetUpdateCreated() *PetUpdateCreated {
 }
 
 /*
-	PetUpdateCreated describes a response with status code 201, with default header values.
+PetUpdateCreated describes a response with status code 201, with default header values.
 
 Updated successfully
 */
@@ -66,37 +67,44 @@ type PetUpdateCreated struct {
 	Payload *models.Pet
 }
 
-// IsSuccess returns true when this pet update created response returns a 2xx status code
+// IsSuccess returns true when this pet update created response has a 2xx status code
 func (o *PetUpdateCreated) IsSuccess() bool {
 	return true
 }
 
-// IsRedirect returns true when this pet update created response returns a 3xx status code
+// IsRedirect returns true when this pet update created response has a 3xx status code
 func (o *PetUpdateCreated) IsRedirect() bool {
 	return false
 }
 
-// IsClientError returns true when this pet update created response returns a 4xx status code
+// IsClientError returns true when this pet update created response has a 4xx status code
 func (o *PetUpdateCreated) IsClientError() bool {
 	return false
 }
 
-// IsServerError returns true when this pet update created response returns a 5xx status code
+// IsServerError returns true when this pet update created response has a 5xx status code
 func (o *PetUpdateCreated) IsServerError() bool {
 	return false
 }
 
-// IsCode returns true when this pet update created response returns a 4xx status code
+// IsCode returns true when this pet update created response a status code equal to that given
 func (o *PetUpdateCreated) IsCode(code int) bool {
 	return code == 201
 }
 
+// Code gets the status code for the pet update created response
+func (o *PetUpdateCreated) Code() int {
+	return 201
+}
+
 func (o *PetUpdateCreated) Error() string {
-	return fmt.Sprintf("[PUT /pet][%d] petUpdateCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /pet][%d] petUpdateCreated %s", 201, payload)
 }
 
 func (o *PetUpdateCreated) String() string {
-	return fmt.Sprintf("[PUT /pet][%d] petUpdateCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[PUT /pet][%d] petUpdateCreated %s", 201, payload)
 }
 
 func (o *PetUpdateCreated) GetPayload() *models.Pet {
@@ -121,44 +129,49 @@ func NewPetUpdateBadRequest() *PetUpdateBadRequest {
 }
 
 /*
-	PetUpdateBadRequest describes a response with status code 400, with default header values.
+PetUpdateBadRequest describes a response with status code 400, with default header values.
 
 Invalid ID supplied
 */
 type PetUpdateBadRequest struct {
 }
 
-// IsSuccess returns true when this pet update bad request response returns a 2xx status code
+// IsSuccess returns true when this pet update bad request response has a 2xx status code
 func (o *PetUpdateBadRequest) IsSuccess() bool {
 	return false
 }
 
-// IsRedirect returns true when this pet update bad request response returns a 3xx status code
+// IsRedirect returns true when this pet update bad request response has a 3xx status code
 func (o *PetUpdateBadRequest) IsRedirect() bool {
 	return false
 }
 
-// IsClientError returns true when this pet update bad request response returns a 4xx status code
+// IsClientError returns true when this pet update bad request response has a 4xx status code
 func (o *PetUpdateBadRequest) IsClientError() bool {
 	return true
 }
 
-// IsServerError returns true when this pet update bad request response returns a 5xx status code
+// IsServerError returns true when this pet update bad request response has a 5xx status code
 func (o *PetUpdateBadRequest) IsServerError() bool {
 	return false
 }
 
-// IsCode returns true when this pet update bad request response returns a 4xx status code
+// IsCode returns true when this pet update bad request response a status code equal to that given
 func (o *PetUpdateBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the pet update bad request response
+func (o *PetUpdateBadRequest) Code() int {
+	return 400
+}
+
 func (o *PetUpdateBadRequest) Error() string {
-	return fmt.Sprintf("[PUT /pet][%d] petUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /pet][%d] petUpdateBadRequest", 400)
 }
 
 func (o *PetUpdateBadRequest) String() string {
-	return fmt.Sprintf("[PUT /pet][%d] petUpdateBadRequest ", 400)
+	return fmt.Sprintf("[PUT /pet][%d] petUpdateBadRequest", 400)
 }
 
 func (o *PetUpdateBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -172,44 +185,49 @@ func NewPetUpdateNotFound() *PetUpdateNotFound {
 }
 
 /*
-	PetUpdateNotFound describes a response with status code 404, with default header values.
+PetUpdateNotFound describes a response with status code 404, with default header values.
 
 Pet not found
 */
 type PetUpdateNotFound struct {
 }
 
-// IsSuccess returns true when this pet update not found response returns a 2xx status code
+// IsSuccess returns true when this pet update not found response has a 2xx status code
 func (o *PetUpdateNotFound) IsSuccess() bool {
 	return false
 }
 
-// IsRedirect returns true when this pet update not found response returns a 3xx status code
+// IsRedirect returns true when this pet update not found response has a 3xx status code
 func (o *PetUpdateNotFound) IsRedirect() bool {
 	return false
 }
 
-// IsClientError returns true when this pet update not found response returns a 4xx status code
+// IsClientError returns true when this pet update not found response has a 4xx status code
 func (o *PetUpdateNotFound) IsClientError() bool {
 	return true
 }
 
-// IsServerError returns true when this pet update not found response returns a 5xx status code
+// IsServerError returns true when this pet update not found response has a 5xx status code
 func (o *PetUpdateNotFound) IsServerError() bool {
 	return false
 }
 
-// IsCode returns true when this pet update not found response returns a 4xx status code
+// IsCode returns true when this pet update not found response a status code equal to that given
 func (o *PetUpdateNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the pet update not found response
+func (o *PetUpdateNotFound) Code() int {
+	return 404
+}
+
 func (o *PetUpdateNotFound) Error() string {
-	return fmt.Sprintf("[PUT /pet][%d] petUpdateNotFound ", 404)
+	return fmt.Sprintf("[PUT /pet][%d] petUpdateNotFound", 404)
 }
 
 func (o *PetUpdateNotFound) String() string {
-	return fmt.Sprintf("[PUT /pet][%d] petUpdateNotFound ", 404)
+	return fmt.Sprintf("[PUT /pet][%d] petUpdateNotFound", 404)
 }
 
 func (o *PetUpdateNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -223,44 +241,49 @@ func NewPetUpdateMethodNotAllowed() *PetUpdateMethodNotAllowed {
 }
 
 /*
-	PetUpdateMethodNotAllowed describes a response with status code 405, with default header values.
+PetUpdateMethodNotAllowed describes a response with status code 405, with default header values.
 
 Validation exception
 */
 type PetUpdateMethodNotAllowed struct {
 }
 
-// IsSuccess returns true when this pet update method not allowed response returns a 2xx status code
+// IsSuccess returns true when this pet update method not allowed response has a 2xx status code
 func (o *PetUpdateMethodNotAllowed) IsSuccess() bool {
 	return false
 }
 
-// IsRedirect returns true when this pet update method not allowed response returns a 3xx status code
+// IsRedirect returns true when this pet update method not allowed response has a 3xx status code
 func (o *PetUpdateMethodNotAllowed) IsRedirect() bool {
 	return false
 }
 
-// IsClientError returns true when this pet update method not allowed response returns a 4xx status code
+// IsClientError returns true when this pet update method not allowed response has a 4xx status code
 func (o *PetUpdateMethodNotAllowed) IsClientError() bool {
 	return true
 }
 
-// IsServerError returns true when this pet update method not allowed response returns a 5xx status code
+// IsServerError returns true when this pet update method not allowed response has a 5xx status code
 func (o *PetUpdateMethodNotAllowed) IsServerError() bool {
 	return false
 }
 
-// IsCode returns true when this pet update method not allowed response returns a 4xx status code
+// IsCode returns true when this pet update method not allowed response a status code equal to that given
 func (o *PetUpdateMethodNotAllowed) IsCode(code int) bool {
 	return code == 405
 }
 
+// Code gets the status code for the pet update method not allowed response
+func (o *PetUpdateMethodNotAllowed) Code() int {
+	return 405
+}
+
 func (o *PetUpdateMethodNotAllowed) Error() string {
-	return fmt.Sprintf("[PUT /pet][%d] petUpdateMethodNotAllowed ", 405)
+	return fmt.Sprintf("[PUT /pet][%d] petUpdateMethodNotAllowed", 405)
 }
 
 func (o *PetUpdateMethodNotAllowed) String() string {
-	return fmt.Sprintf("[PUT /pet][%d] petUpdateMethodNotAllowed ", 405)
+	return fmt.Sprintf("[PUT /pet][%d] petUpdateMethodNotAllowed", 405)
 }
 
 func (o *PetUpdateMethodNotAllowed) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

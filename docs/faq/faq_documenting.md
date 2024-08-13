@@ -1,5 +1,12 @@
+---
+title: About documentating your API
+date: 2023-01-01T01:01:01-08:00
+draft: true
+---
 <!-- Questions about the serve UI use-case -->
 ### Serving swagger-ui with the API Server
+Update: You can visit $API_BASE/docs and it should show the UI, as mentioned in [#comment](https://github.com/go-swagger/go-swagger/issues/2401#issuecomment-688962519) 
+
 _Use-Case_: I was trying to serve swagger-ui from the generated API Server and
 I didn't find a straightforward enough way in the docs,
 so I've created my own swagger-ui middleware:
@@ -38,7 +45,7 @@ and severely bloated the size of my binary.
 I'm reluctant to do so at this point in time because a git submodule break go-gettability.
 
 >I've had it included at one point but it's so much of a moving target that it would always be outdated.
->On top of it it are a lot of javascript and html files and people haven't been over the moon when go-swagger gets
+>On top of it is a lot of javascript and html files and people haven't been over the moon when go-swagger gets
 >vendored and they see all of that.
 
 Originally from issue [#370](https://github.com/go-swagger/go-swagger/issues/370).
@@ -61,7 +68,7 @@ Originally from issues [#1029](https://github.com/go-swagger/go-swagger/issues/1
 
 Like: https://github.com/rs/cors
 
-[Documentation on how to customize middleware](use/middleware.md)
+[Documentation on how to customize middleware](reference/middleware.md)
 
 Working example (in `configure_name.go`):
 
@@ -114,6 +121,3 @@ Besides, every swagger generated server comes with the redoc UI baked in at `/{b
 
 Originally from issue [#1375](https://github.com/go-swagger/go-swagger/issues/1375).
 
--------------------
-
-Back to [all contributions](README.md#all-contributed-questions)

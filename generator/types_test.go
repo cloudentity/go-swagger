@@ -2,9 +2,6 @@ package generator
 
 import (
 	"encoding/json"
-	"io"
-	"log"
-	"os"
 	"strconv"
 	"testing"
 
@@ -353,7 +350,11 @@ func TestShortCircuitResolveExternal(t *testing.T) {
 			require.NotNil(t, extType)
 
 			tpe, pkg, alias := r.knownDefGoType("A", schema, r.goTypeName)
-			require.EqualValuesf(t, fixture.knownDefs, struct{ tpe, pkg, alias string }{tpe, pkg, alias}, "fixture %d", i)
+			require.EqualValuesf(t,
+				struct{ tpe, pkg, alias string }{tpe, pkg, alias},
+				fixture.knownDefs,
+				"fixture %d", i,
+			)
 
 			resolved := r.shortCircuitResolveExternal(tpe, pkg, alias, extType, &schema, false)
 
@@ -468,10 +469,7 @@ func makeGuardValidationFixtures() []guardValidationsFixture {
 }
 
 func TestGuardValidations(t *testing.T) {
-	log.SetOutput(io.Discard)
-	defer func() {
-		log.SetOutput(os.Stdout)
-	}()
+	defer discardOutput()()
 
 	for _, toPin := range makeGuardValidationFixtures() {
 		testCase := toPin
@@ -497,7 +495,8 @@ func makeGuardFormatFixtures() []guardValidationsFixture {
 						MinLength: swag.Int64(15),
 						Pattern:   "xyz",
 						Enum:      []interface{}{"x", 34},
-					}}),
+					},
+				}),
 			Asserter: func(t testing.TB, val spec.SchemaValidations) {
 				require.True(t, val.HasStringValidations(), "expected string validations, got: %#v", val)
 				require.True(t, val.HasEnum())
@@ -512,7 +511,8 @@ func makeGuardFormatFixtures() []guardValidationsFixture {
 						MinLength: swag.Int64(15),
 						Pattern:   "xyz",
 						Enum:      []interface{}{"x", 34},
-					}}),
+					},
+				}),
 			Asserter: func(t testing.TB, val spec.SchemaValidations) {
 				require.False(t, val.HasStringValidations(), "expected no string validations, got: %#v", val)
 				require.False(t, val.HasEnum())

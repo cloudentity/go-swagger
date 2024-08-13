@@ -6,6 +6,7 @@ package tasks
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -47,44 +48,49 @@ func NewUploadTaskFileCreated() *UploadTaskFileCreated {
 }
 
 /*
-	UploadTaskFileCreated describes a response with status code 201, with default header values.
+UploadTaskFileCreated describes a response with status code 201, with default header values.
 
 File added
 */
 type UploadTaskFileCreated struct {
 }
 
-// IsSuccess returns true when this upload task file created response returns a 2xx status code
+// IsSuccess returns true when this upload task file created response has a 2xx status code
 func (o *UploadTaskFileCreated) IsSuccess() bool {
 	return true
 }
 
-// IsRedirect returns true when this upload task file created response returns a 3xx status code
+// IsRedirect returns true when this upload task file created response has a 3xx status code
 func (o *UploadTaskFileCreated) IsRedirect() bool {
 	return false
 }
 
-// IsClientError returns true when this upload task file created response returns a 4xx status code
+// IsClientError returns true when this upload task file created response has a 4xx status code
 func (o *UploadTaskFileCreated) IsClientError() bool {
 	return false
 }
 
-// IsServerError returns true when this upload task file created response returns a 5xx status code
+// IsServerError returns true when this upload task file created response has a 5xx status code
 func (o *UploadTaskFileCreated) IsServerError() bool {
 	return false
 }
 
-// IsCode returns true when this upload task file created response returns a 4xx status code
+// IsCode returns true when this upload task file created response a status code equal to that given
 func (o *UploadTaskFileCreated) IsCode(code int) bool {
 	return code == 201
 }
 
+// Code gets the status code for the upload task file created response
+func (o *UploadTaskFileCreated) Code() int {
+	return 201
+}
+
 func (o *UploadTaskFileCreated) Error() string {
-	return fmt.Sprintf("[POST /tasks/{id}/files][%d] uploadTaskFileCreated ", 201)
+	return fmt.Sprintf("[POST /tasks/{id}/files][%d] uploadTaskFileCreated", 201)
 }
 
 func (o *UploadTaskFileCreated) String() string {
-	return fmt.Sprintf("[POST /tasks/{id}/files][%d] uploadTaskFileCreated ", 201)
+	return fmt.Sprintf("[POST /tasks/{id}/files][%d] uploadTaskFileCreated", 201)
 }
 
 func (o *UploadTaskFileCreated) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -100,7 +106,7 @@ func NewUploadTaskFileDefault(code int) *UploadTaskFileDefault {
 }
 
 /*
-	UploadTaskFileDefault describes a response with status code -1, with default header values.
+UploadTaskFileDefault describes a response with status code -1, with default header values.
 
 Error response
 */
@@ -111,42 +117,44 @@ type UploadTaskFileDefault struct {
 	Payload *models.Error
 }
 
+// IsSuccess returns true when this upload task file default response has a 2xx status code
+func (o *UploadTaskFileDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this upload task file default response has a 3xx status code
+func (o *UploadTaskFileDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this upload task file default response has a 4xx status code
+func (o *UploadTaskFileDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this upload task file default response has a 5xx status code
+func (o *UploadTaskFileDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this upload task file default response a status code equal to that given
+func (o *UploadTaskFileDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 // Code gets the status code for the upload task file default response
 func (o *UploadTaskFileDefault) Code() int {
 	return o._statusCode
 }
 
-// IsSuccess returns true when this upload task file default response returns a 2xx status code
-func (o *UploadTaskFileDefault) IsSuccess() bool {
-	return o._statusCode/100 == 2
-}
-
-// IsRedirect returns true when this upload task file default response returns a 3xx status code
-func (o *UploadTaskFileDefault) IsRedirect() bool {
-	return o._statusCode/100 == 3
-}
-
-// IsClientError returns true when this upload task file default response returns a 4xx status code
-func (o *UploadTaskFileDefault) IsClientError() bool {
-	return o._statusCode/100 == 4
-}
-
-// IsServerError returns true when this upload task file default response returns a 5xx status code
-func (o *UploadTaskFileDefault) IsServerError() bool {
-	return o._statusCode/100 == 5
-}
-
-// IsCode returns true when this upload task file default response returns a 4xx status code
-func (o *UploadTaskFileDefault) IsCode(code int) bool {
-	return o._statusCode == code
-}
-
 func (o *UploadTaskFileDefault) Error() string {
-	return fmt.Sprintf("[POST /tasks/{id}/files][%d] uploadTaskFile default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /tasks/{id}/files][%d] uploadTaskFile default %s", o._statusCode, payload)
 }
 
 func (o *UploadTaskFileDefault) String() string {
-	return fmt.Sprintf("[POST /tasks/{id}/files][%d] uploadTaskFile default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /tasks/{id}/files][%d] uploadTaskFile default %s", o._statusCode, payload)
 }
 
 func (o *UploadTaskFileDefault) GetPayload() *models.Error {

@@ -6,6 +6,7 @@ package pet
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -36,7 +37,7 @@ func (o *PetCreateReader) ReadResponse(response runtime.ClientResponse, consumer
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[POST /pet] PetCreate", response, response.Code())
 	}
 }
 
@@ -46,7 +47,7 @@ func NewPetCreateCreated() *PetCreateCreated {
 }
 
 /*
-	PetCreateCreated describes a response with status code 201, with default header values.
+PetCreateCreated describes a response with status code 201, with default header values.
 
 Created
 */
@@ -54,37 +55,44 @@ type PetCreateCreated struct {
 	Payload *models.Pet
 }
 
-// IsSuccess returns true when this pet create created response returns a 2xx status code
+// IsSuccess returns true when this pet create created response has a 2xx status code
 func (o *PetCreateCreated) IsSuccess() bool {
 	return true
 }
 
-// IsRedirect returns true when this pet create created response returns a 3xx status code
+// IsRedirect returns true when this pet create created response has a 3xx status code
 func (o *PetCreateCreated) IsRedirect() bool {
 	return false
 }
 
-// IsClientError returns true when this pet create created response returns a 4xx status code
+// IsClientError returns true when this pet create created response has a 4xx status code
 func (o *PetCreateCreated) IsClientError() bool {
 	return false
 }
 
-// IsServerError returns true when this pet create created response returns a 5xx status code
+// IsServerError returns true when this pet create created response has a 5xx status code
 func (o *PetCreateCreated) IsServerError() bool {
 	return false
 }
 
-// IsCode returns true when this pet create created response returns a 4xx status code
+// IsCode returns true when this pet create created response a status code equal to that given
 func (o *PetCreateCreated) IsCode(code int) bool {
 	return code == 201
 }
 
+// Code gets the status code for the pet create created response
+func (o *PetCreateCreated) Code() int {
+	return 201
+}
+
 func (o *PetCreateCreated) Error() string {
-	return fmt.Sprintf("[POST /pet][%d] petCreateCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /pet][%d] petCreateCreated %s", 201, payload)
 }
 
 func (o *PetCreateCreated) String() string {
-	return fmt.Sprintf("[POST /pet][%d] petCreateCreated  %+v", 201, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[POST /pet][%d] petCreateCreated %s", 201, payload)
 }
 
 func (o *PetCreateCreated) GetPayload() *models.Pet {
@@ -109,44 +117,49 @@ func NewPetCreateMethodNotAllowed() *PetCreateMethodNotAllowed {
 }
 
 /*
-	PetCreateMethodNotAllowed describes a response with status code 405, with default header values.
+PetCreateMethodNotAllowed describes a response with status code 405, with default header values.
 
 Invalid input
 */
 type PetCreateMethodNotAllowed struct {
 }
 
-// IsSuccess returns true when this pet create method not allowed response returns a 2xx status code
+// IsSuccess returns true when this pet create method not allowed response has a 2xx status code
 func (o *PetCreateMethodNotAllowed) IsSuccess() bool {
 	return false
 }
 
-// IsRedirect returns true when this pet create method not allowed response returns a 3xx status code
+// IsRedirect returns true when this pet create method not allowed response has a 3xx status code
 func (o *PetCreateMethodNotAllowed) IsRedirect() bool {
 	return false
 }
 
-// IsClientError returns true when this pet create method not allowed response returns a 4xx status code
+// IsClientError returns true when this pet create method not allowed response has a 4xx status code
 func (o *PetCreateMethodNotAllowed) IsClientError() bool {
 	return true
 }
 
-// IsServerError returns true when this pet create method not allowed response returns a 5xx status code
+// IsServerError returns true when this pet create method not allowed response has a 5xx status code
 func (o *PetCreateMethodNotAllowed) IsServerError() bool {
 	return false
 }
 
-// IsCode returns true when this pet create method not allowed response returns a 4xx status code
+// IsCode returns true when this pet create method not allowed response a status code equal to that given
 func (o *PetCreateMethodNotAllowed) IsCode(code int) bool {
 	return code == 405
 }
 
+// Code gets the status code for the pet create method not allowed response
+func (o *PetCreateMethodNotAllowed) Code() int {
+	return 405
+}
+
 func (o *PetCreateMethodNotAllowed) Error() string {
-	return fmt.Sprintf("[POST /pet][%d] petCreateMethodNotAllowed ", 405)
+	return fmt.Sprintf("[POST /pet][%d] petCreateMethodNotAllowed", 405)
 }
 
 func (o *PetCreateMethodNotAllowed) String() string {
-	return fmt.Sprintf("[POST /pet][%d] petCreateMethodNotAllowed ", 405)
+	return fmt.Sprintf("[POST /pet][%d] petCreateMethodNotAllowed", 405)
 }
 
 func (o *PetCreateMethodNotAllowed) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

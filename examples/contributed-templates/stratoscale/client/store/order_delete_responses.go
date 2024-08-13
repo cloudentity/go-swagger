@@ -39,7 +39,7 @@ func (o *OrderDeleteReader) ReadResponse(response runtime.ClientResponse, consum
 		}
 		return nil, result
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[DELETE /store/order/{orderId}] OrderDelete", response, response.Code())
 	}
 }
 
@@ -49,44 +49,49 @@ func NewOrderDeleteNoContent() *OrderDeleteNoContent {
 }
 
 /*
-	OrderDeleteNoContent describes a response with status code 204, with default header values.
+OrderDeleteNoContent describes a response with status code 204, with default header values.
 
 Deleted successfully
 */
 type OrderDeleteNoContent struct {
 }
 
-// IsSuccess returns true when this order delete no content response returns a 2xx status code
+// IsSuccess returns true when this order delete no content response has a 2xx status code
 func (o *OrderDeleteNoContent) IsSuccess() bool {
 	return true
 }
 
-// IsRedirect returns true when this order delete no content response returns a 3xx status code
+// IsRedirect returns true when this order delete no content response has a 3xx status code
 func (o *OrderDeleteNoContent) IsRedirect() bool {
 	return false
 }
 
-// IsClientError returns true when this order delete no content response returns a 4xx status code
+// IsClientError returns true when this order delete no content response has a 4xx status code
 func (o *OrderDeleteNoContent) IsClientError() bool {
 	return false
 }
 
-// IsServerError returns true when this order delete no content response returns a 5xx status code
+// IsServerError returns true when this order delete no content response has a 5xx status code
 func (o *OrderDeleteNoContent) IsServerError() bool {
 	return false
 }
 
-// IsCode returns true when this order delete no content response returns a 4xx status code
+// IsCode returns true when this order delete no content response a status code equal to that given
 func (o *OrderDeleteNoContent) IsCode(code int) bool {
 	return code == 204
 }
 
+// Code gets the status code for the order delete no content response
+func (o *OrderDeleteNoContent) Code() int {
+	return 204
+}
+
 func (o *OrderDeleteNoContent) Error() string {
-	return fmt.Sprintf("[DELETE /store/order/{orderId}][%d] orderDeleteNoContent ", 204)
+	return fmt.Sprintf("[DELETE /store/order/{orderId}][%d] orderDeleteNoContent", 204)
 }
 
 func (o *OrderDeleteNoContent) String() string {
-	return fmt.Sprintf("[DELETE /store/order/{orderId}][%d] orderDeleteNoContent ", 204)
+	return fmt.Sprintf("[DELETE /store/order/{orderId}][%d] orderDeleteNoContent", 204)
 }
 
 func (o *OrderDeleteNoContent) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -100,44 +105,49 @@ func NewOrderDeleteBadRequest() *OrderDeleteBadRequest {
 }
 
 /*
-	OrderDeleteBadRequest describes a response with status code 400, with default header values.
+OrderDeleteBadRequest describes a response with status code 400, with default header values.
 
 Invalid ID supplied
 */
 type OrderDeleteBadRequest struct {
 }
 
-// IsSuccess returns true when this order delete bad request response returns a 2xx status code
+// IsSuccess returns true when this order delete bad request response has a 2xx status code
 func (o *OrderDeleteBadRequest) IsSuccess() bool {
 	return false
 }
 
-// IsRedirect returns true when this order delete bad request response returns a 3xx status code
+// IsRedirect returns true when this order delete bad request response has a 3xx status code
 func (o *OrderDeleteBadRequest) IsRedirect() bool {
 	return false
 }
 
-// IsClientError returns true when this order delete bad request response returns a 4xx status code
+// IsClientError returns true when this order delete bad request response has a 4xx status code
 func (o *OrderDeleteBadRequest) IsClientError() bool {
 	return true
 }
 
-// IsServerError returns true when this order delete bad request response returns a 5xx status code
+// IsServerError returns true when this order delete bad request response has a 5xx status code
 func (o *OrderDeleteBadRequest) IsServerError() bool {
 	return false
 }
 
-// IsCode returns true when this order delete bad request response returns a 4xx status code
+// IsCode returns true when this order delete bad request response a status code equal to that given
 func (o *OrderDeleteBadRequest) IsCode(code int) bool {
 	return code == 400
 }
 
+// Code gets the status code for the order delete bad request response
+func (o *OrderDeleteBadRequest) Code() int {
+	return 400
+}
+
 func (o *OrderDeleteBadRequest) Error() string {
-	return fmt.Sprintf("[DELETE /store/order/{orderId}][%d] orderDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /store/order/{orderId}][%d] orderDeleteBadRequest", 400)
 }
 
 func (o *OrderDeleteBadRequest) String() string {
-	return fmt.Sprintf("[DELETE /store/order/{orderId}][%d] orderDeleteBadRequest ", 400)
+	return fmt.Sprintf("[DELETE /store/order/{orderId}][%d] orderDeleteBadRequest", 400)
 }
 
 func (o *OrderDeleteBadRequest) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {
@@ -151,44 +161,49 @@ func NewOrderDeleteNotFound() *OrderDeleteNotFound {
 }
 
 /*
-	OrderDeleteNotFound describes a response with status code 404, with default header values.
+OrderDeleteNotFound describes a response with status code 404, with default header values.
 
 Order not found
 */
 type OrderDeleteNotFound struct {
 }
 
-// IsSuccess returns true when this order delete not found response returns a 2xx status code
+// IsSuccess returns true when this order delete not found response has a 2xx status code
 func (o *OrderDeleteNotFound) IsSuccess() bool {
 	return false
 }
 
-// IsRedirect returns true when this order delete not found response returns a 3xx status code
+// IsRedirect returns true when this order delete not found response has a 3xx status code
 func (o *OrderDeleteNotFound) IsRedirect() bool {
 	return false
 }
 
-// IsClientError returns true when this order delete not found response returns a 4xx status code
+// IsClientError returns true when this order delete not found response has a 4xx status code
 func (o *OrderDeleteNotFound) IsClientError() bool {
 	return true
 }
 
-// IsServerError returns true when this order delete not found response returns a 5xx status code
+// IsServerError returns true when this order delete not found response has a 5xx status code
 func (o *OrderDeleteNotFound) IsServerError() bool {
 	return false
 }
 
-// IsCode returns true when this order delete not found response returns a 4xx status code
+// IsCode returns true when this order delete not found response a status code equal to that given
 func (o *OrderDeleteNotFound) IsCode(code int) bool {
 	return code == 404
 }
 
+// Code gets the status code for the order delete not found response
+func (o *OrderDeleteNotFound) Code() int {
+	return 404
+}
+
 func (o *OrderDeleteNotFound) Error() string {
-	return fmt.Sprintf("[DELETE /store/order/{orderId}][%d] orderDeleteNotFound ", 404)
+	return fmt.Sprintf("[DELETE /store/order/{orderId}][%d] orderDeleteNotFound", 404)
 }
 
 func (o *OrderDeleteNotFound) String() string {
-	return fmt.Sprintf("[DELETE /store/order/{orderId}][%d] orderDeleteNotFound ", 404)
+	return fmt.Sprintf("[DELETE /store/order/{orderId}][%d] orderDeleteNotFound", 404)
 }
 
 func (o *OrderDeleteNotFound) readResponse(response runtime.ClientResponse, consumer runtime.Consumer, formats strfmt.Registry) error {

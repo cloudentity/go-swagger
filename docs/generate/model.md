@@ -1,3 +1,9 @@
+---
+title: Generating models
+date: 2023-01-01T01:01:01-08:00
+draft: true
+weight: 40
+---
 # Generate models from a swagger spec
 
 
@@ -40,6 +46,7 @@ Help Options:
           --strict-additional-properties                                          disallow extra properties when additionalProperties is set to false
           --keep-spec-order                                                       keep schema properties order identical to spec file
           --struct-tags=                                                          the struct tags to generate, repeat for multiple (defaults to json)
+          --rooted-error-path                                                     extends validation errors with the type name instead of an empty path, in the case of arrays and maps
 ```
 
-Schema generation rules are detailed [here](../use/model.md).
+Schema generation rules are detailed [here](../reference/models/schemas.md).

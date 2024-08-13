@@ -6,6 +6,7 @@ package tasks
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"encoding/json"
 	"fmt"
 	"io"
 
@@ -55,7 +56,7 @@ func NewListTasksOK() *ListTasksOK {
 }
 
 /*
-	ListTasksOK describes a response with status code 200, with default header values.
+ListTasksOK describes a response with status code 200, with default header values.
 
 Successful response
 */
@@ -70,37 +71,44 @@ type ListTasksOK struct {
 	Payload []*models.TaskCard
 }
 
-// IsSuccess returns true when this list tasks o k response returns a 2xx status code
+// IsSuccess returns true when this list tasks o k response has a 2xx status code
 func (o *ListTasksOK) IsSuccess() bool {
 	return true
 }
 
-// IsRedirect returns true when this list tasks o k response returns a 3xx status code
+// IsRedirect returns true when this list tasks o k response has a 3xx status code
 func (o *ListTasksOK) IsRedirect() bool {
 	return false
 }
 
-// IsClientError returns true when this list tasks o k response returns a 4xx status code
+// IsClientError returns true when this list tasks o k response has a 4xx status code
 func (o *ListTasksOK) IsClientError() bool {
 	return false
 }
 
-// IsServerError returns true when this list tasks o k response returns a 5xx status code
+// IsServerError returns true when this list tasks o k response has a 5xx status code
 func (o *ListTasksOK) IsServerError() bool {
 	return false
 }
 
-// IsCode returns true when this list tasks o k response returns a 4xx status code
+// IsCode returns true when this list tasks o k response a status code equal to that given
 func (o *ListTasksOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the list tasks o k response
+func (o *ListTasksOK) Code() int {
+	return 200
+}
+
 func (o *ListTasksOK) Error() string {
-	return fmt.Sprintf("[GET /tasks][%d] listTasksOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /tasks][%d] listTasksOK %s", 200, payload)
 }
 
 func (o *ListTasksOK) String() string {
-	return fmt.Sprintf("[GET /tasks][%d] listTasksOK  %+v", 200, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /tasks][%d] listTasksOK %s", 200, payload)
 }
 
 func (o *ListTasksOK) GetPayload() []*models.TaskCard {
@@ -134,7 +142,7 @@ func NewListTasksUnprocessableEntity() *ListTasksUnprocessableEntity {
 }
 
 /*
-	ListTasksUnprocessableEntity describes a response with status code 422, with default header values.
+ListTasksUnprocessableEntity describes a response with status code 422, with default header values.
 
 Validation error
 */
@@ -142,37 +150,44 @@ type ListTasksUnprocessableEntity struct {
 	Payload *models.ValidationError
 }
 
-// IsSuccess returns true when this list tasks unprocessable entity response returns a 2xx status code
+// IsSuccess returns true when this list tasks unprocessable entity response has a 2xx status code
 func (o *ListTasksUnprocessableEntity) IsSuccess() bool {
 	return false
 }
 
-// IsRedirect returns true when this list tasks unprocessable entity response returns a 3xx status code
+// IsRedirect returns true when this list tasks unprocessable entity response has a 3xx status code
 func (o *ListTasksUnprocessableEntity) IsRedirect() bool {
 	return false
 }
 
-// IsClientError returns true when this list tasks unprocessable entity response returns a 4xx status code
+// IsClientError returns true when this list tasks unprocessable entity response has a 4xx status code
 func (o *ListTasksUnprocessableEntity) IsClientError() bool {
 	return true
 }
 
-// IsServerError returns true when this list tasks unprocessable entity response returns a 5xx status code
+// IsServerError returns true when this list tasks unprocessable entity response has a 5xx status code
 func (o *ListTasksUnprocessableEntity) IsServerError() bool {
 	return false
 }
 
-// IsCode returns true when this list tasks unprocessable entity response returns a 4xx status code
+// IsCode returns true when this list tasks unprocessable entity response a status code equal to that given
 func (o *ListTasksUnprocessableEntity) IsCode(code int) bool {
 	return code == 422
 }
 
+// Code gets the status code for the list tasks unprocessable entity response
+func (o *ListTasksUnprocessableEntity) Code() int {
+	return 422
+}
+
 func (o *ListTasksUnprocessableEntity) Error() string {
-	return fmt.Sprintf("[GET /tasks][%d] listTasksUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /tasks][%d] listTasksUnprocessableEntity %s", 422, payload)
 }
 
 func (o *ListTasksUnprocessableEntity) String() string {
-	return fmt.Sprintf("[GET /tasks][%d] listTasksUnprocessableEntity  %+v", 422, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /tasks][%d] listTasksUnprocessableEntity %s", 422, payload)
 }
 
 func (o *ListTasksUnprocessableEntity) GetPayload() *models.ValidationError {
@@ -199,7 +214,7 @@ func NewListTasksDefault(code int) *ListTasksDefault {
 }
 
 /*
-	ListTasksDefault describes a response with status code -1, with default header values.
+ListTasksDefault describes a response with status code -1, with default header values.
 
 Error response
 */
@@ -210,42 +225,44 @@ type ListTasksDefault struct {
 	Payload *models.Error
 }
 
+// IsSuccess returns true when this list tasks default response has a 2xx status code
+func (o *ListTasksDefault) IsSuccess() bool {
+	return o._statusCode/100 == 2
+}
+
+// IsRedirect returns true when this list tasks default response has a 3xx status code
+func (o *ListTasksDefault) IsRedirect() bool {
+	return o._statusCode/100 == 3
+}
+
+// IsClientError returns true when this list tasks default response has a 4xx status code
+func (o *ListTasksDefault) IsClientError() bool {
+	return o._statusCode/100 == 4
+}
+
+// IsServerError returns true when this list tasks default response has a 5xx status code
+func (o *ListTasksDefault) IsServerError() bool {
+	return o._statusCode/100 == 5
+}
+
+// IsCode returns true when this list tasks default response a status code equal to that given
+func (o *ListTasksDefault) IsCode(code int) bool {
+	return o._statusCode == code
+}
+
 // Code gets the status code for the list tasks default response
 func (o *ListTasksDefault) Code() int {
 	return o._statusCode
 }
 
-// IsSuccess returns true when this list tasks default response returns a 2xx status code
-func (o *ListTasksDefault) IsSuccess() bool {
-	return o._statusCode/100 == 2
-}
-
-// IsRedirect returns true when this list tasks default response returns a 3xx status code
-func (o *ListTasksDefault) IsRedirect() bool {
-	return o._statusCode/100 == 3
-}
-
-// IsClientError returns true when this list tasks default response returns a 4xx status code
-func (o *ListTasksDefault) IsClientError() bool {
-	return o._statusCode/100 == 4
-}
-
-// IsServerError returns true when this list tasks default response returns a 5xx status code
-func (o *ListTasksDefault) IsServerError() bool {
-	return o._statusCode/100 == 5
-}
-
-// IsCode returns true when this list tasks default response returns a 4xx status code
-func (o *ListTasksDefault) IsCode(code int) bool {
-	return o._statusCode == code
-}
-
 func (o *ListTasksDefault) Error() string {
-	return fmt.Sprintf("[GET /tasks][%d] listTasks default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /tasks][%d] listTasks default %s", o._statusCode, payload)
 }
 
 func (o *ListTasksDefault) String() string {
-	return fmt.Sprintf("[GET /tasks][%d] listTasks default  %+v", o._statusCode, o.Payload)
+	payload, _ := json.Marshal(o.Payload)
+	return fmt.Sprintf("[GET /tasks][%d] listTasks default %s", o._statusCode, payload)
 }
 
 func (o *ListTasksDefault) GetPayload() *models.Error {

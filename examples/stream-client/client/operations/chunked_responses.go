@@ -29,7 +29,7 @@ func (o *ChunkedReader) ReadResponse(response runtime.ClientResponse, consumer r
 		}
 		return result, nil
 	default:
-		return nil, runtime.NewAPIError("response status code does not match any response statuses defined for this endpoint in the swagger spec", response, response.Code())
+		return nil, runtime.NewAPIError("[GET /HTTP/ChunkedScript] chunked", response, response.Code())
 	}
 }
 
@@ -42,7 +42,7 @@ func NewChunkedOK(writer io.Writer) *ChunkedOK {
 }
 
 /*
-	ChunkedOK describes a response with status code 200, with default header values.
+ChunkedOK describes a response with status code 200, with default header values.
 
 chunked data delivered
 */
@@ -50,37 +50,42 @@ type ChunkedOK struct {
 	Payload io.Writer
 }
 
-// IsSuccess returns true when this chunked o k response returns a 2xx status code
+// IsSuccess returns true when this chunked o k response has a 2xx status code
 func (o *ChunkedOK) IsSuccess() bool {
 	return true
 }
 
-// IsRedirect returns true when this chunked o k response returns a 3xx status code
+// IsRedirect returns true when this chunked o k response has a 3xx status code
 func (o *ChunkedOK) IsRedirect() bool {
 	return false
 }
 
-// IsClientError returns true when this chunked o k response returns a 4xx status code
+// IsClientError returns true when this chunked o k response has a 4xx status code
 func (o *ChunkedOK) IsClientError() bool {
 	return false
 }
 
-// IsServerError returns true when this chunked o k response returns a 5xx status code
+// IsServerError returns true when this chunked o k response has a 5xx status code
 func (o *ChunkedOK) IsServerError() bool {
 	return false
 }
 
-// IsCode returns true when this chunked o k response returns a 4xx status code
+// IsCode returns true when this chunked o k response a status code equal to that given
 func (o *ChunkedOK) IsCode(code int) bool {
 	return code == 200
 }
 
+// Code gets the status code for the chunked o k response
+func (o *ChunkedOK) Code() int {
+	return 200
+}
+
 func (o *ChunkedOK) Error() string {
-	return fmt.Sprintf("[GET /HTTP/ChunkedScript][%d] chunkedOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /HTTP/ChunkedScript][%d] chunkedOK", 200)
 }
 
 func (o *ChunkedOK) String() string {
-	return fmt.Sprintf("[GET /HTTP/ChunkedScript][%d] chunkedOK  %+v", 200, o.Payload)
+	return fmt.Sprintf("[GET /HTTP/ChunkedScript][%d] chunkedOK", 200)
 }
 
 func (o *ChunkedOK) GetPayload() io.Writer {

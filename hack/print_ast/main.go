@@ -1,3 +1,5 @@
+//go:build ignore
+
 package main
 
 import (
@@ -13,6 +15,7 @@ var fileName string
 func init() {
 	flag.StringVar(&fileName, "f", "", "input file")
 }
+
 func main() {
 	flag.Parse()
 

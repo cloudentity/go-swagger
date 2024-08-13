@@ -3,6 +3,7 @@ package restapi
 // THIS CODE HAS NOT BEEN GENERATED
 
 import (
+	"errors"
 	"fmt"
 	"io"
 	"log"
@@ -10,7 +11,7 @@ import (
 
 	"context"
 
-	oidc "github.com/coreos/go-oidc"
+	oidc "github.com/coreos/go-oidc/v3/oidc"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
 	"golang.org/x/oauth2"
@@ -70,7 +71,7 @@ func callback(r *http.Request) (string, error) {
 
 	if r.URL.Query().Get("state") != state {
 		log.Println("state did not match")
-		return "", fmt.Errorf("state did not match")
+		return "", errors.New("state did not match")
 	}
 
 	myClient := &http.Client{}
@@ -87,7 +88,7 @@ func callback(r *http.Request) (string, error) {
 	oauth2Token, err := config.Exchange(ctx, authCode)
 	if err != nil {
 		log.Println("failed to exchange token", err.Error())
-		return "", fmt.Errorf("failed to exchange token")
+		return "", errors.New("failed to exchange token")
 	}
 
 	// the authorization server's returned token

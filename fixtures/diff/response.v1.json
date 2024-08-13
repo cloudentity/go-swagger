@@ -125,6 +125,13 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "200 response",
+            "schema": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/C1" }
+            }
+          },
           "204": {
             "description": "204 response"
           }
@@ -250,6 +257,15 @@
       "properties": {
         "a": { "type": "string" },
         "b": { "type": "string" }
+      }
+    },
+    "C5": {
+      "required": [ "a"],
+      "properties": {
+        "a": {
+          "type": "array",
+          "items": {"type": "string"}
+        }
       }
     }
   }

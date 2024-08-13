@@ -97,7 +97,7 @@ Binding makes use of plain vanilla golang serializers and they are identified by
 
 Binding is not only about request bodies but also about values obtained from headers, query string parameters and potentially the route path pattern. So the binding should make use of the full request object to produce a model.
 
-It determines a serializer to use by looking in the the merged consumes values and the `Content-Type` header to determine which deserializer to use.  
+It determines a serializer to use by looking in the merged consumes values and the `Content-Type` header to determine which deserializer to use.  
 When a result is produced it will do the same thing by making use of the `Accept` http header etc and the merged produces clauses for the operation endpoint.
 
 ```go
@@ -145,7 +145,7 @@ The second part is generating a swagger spec from go code based on annotations a
 
 The goal of this code generation is to just take care of the boilerplate.
 It uses a very small runtime to accommodate the swagger workflow. These are just small helpers for sharing some common
-code.  The server application uses plain go http do do its thing. All other code is generated so you can read what it
+code.  The server application uses plain go http do its thing. All other code is generated so you can read what it
 does and if you think it's worth it.
 
 The go server api generator however won't reuse those templates but define its own set, because currently no proper go support exists in that project. Once I'm happy with what they generate I'll contribute them back to the swagger-codegen project.

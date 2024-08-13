@@ -15,7 +15,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// makeOperationTodosFindTodosCmd returns a cmd to handle operation findTodos
+// makeOperationTodosFindTodosCmd returns a command to handle operation findTodos
 func makeOperationTodosFindTodosCmd() (*cobra.Command, error) {
 	cmd := &cobra.Command{
 		Use:   "findTodos",
@@ -38,14 +38,13 @@ func runOperationTodosFindTodos(cmd *cobra.Command, args []string) error {
 	}
 	// retrieve flag values from cmd and fill params
 	params := todos.NewFindTodosParams()
-	if err, _ := retrieveOperationTodosFindTodosLimitFlag(params, "", cmd); err != nil {
+	if err, _ = retrieveOperationTodosFindTodosLimitFlag(params, "", cmd); err != nil {
 		return err
 	}
-	if err, _ := retrieveOperationTodosFindTodosSinceFlag(params, "", cmd); err != nil {
+	if err, _ = retrieveOperationTodosFindTodosSinceFlag(params, "", cmd); err != nil {
 		return err
 	}
 	if dryRun {
-
 		logDebugf("dry-run flag specified. Skip sending request.")
 		return nil
 	}
@@ -54,10 +53,11 @@ func runOperationTodosFindTodos(cmd *cobra.Command, args []string) error {
 	if err != nil {
 		return err
 	}
-	if !debug {
 
+	if !debug {
 		fmt.Println(msgStr)
 	}
+
 	return nil
 }
 
@@ -74,35 +74,36 @@ func registerOperationTodosFindTodosParamFlags(cmd *cobra.Command) error {
 
 func registerOperationTodosFindTodosLimitParamFlags(cmdPrefix string, cmd *cobra.Command) error {
 
-	limitDescription := ``
+	flagLimitDescription := ``
 
-	var limitFlagName string
+	var flagLimitName string
 	if cmdPrefix == "" {
-		limitFlagName = "limit"
+		flagLimitName = "limit"
 	} else {
-		limitFlagName = fmt.Sprintf("%v.limit", cmdPrefix)
+		flagLimitName = fmt.Sprintf("%v.limit", cmdPrefix)
 	}
 
-	var limitFlagDefault int32 = 20
+	var flagLimitDefault int32 = 20
 
-	_ = cmd.PersistentFlags().Int32(limitFlagName, limitFlagDefault, limitDescription)
+	_ = cmd.PersistentFlags().Int32(flagLimitName, flagLimitDefault, flagLimitDescription)
 
 	return nil
 }
+
 func registerOperationTodosFindTodosSinceParamFlags(cmdPrefix string, cmd *cobra.Command) error {
 
-	sinceDescription := ``
+	flagSinceDescription := ``
 
-	var sinceFlagName string
+	var flagSinceName string
 	if cmdPrefix == "" {
-		sinceFlagName = "since"
+		flagSinceName = "since"
 	} else {
-		sinceFlagName = fmt.Sprintf("%v.since", cmdPrefix)
+		flagSinceName = fmt.Sprintf("%v.since", cmdPrefix)
 	}
 
-	var sinceFlagDefault int64
+	var flagSinceDefault int64
 
-	_ = cmd.PersistentFlags().Int64(sinceFlagName, sinceFlagDefault, sinceDescription)
+	_ = cmd.PersistentFlags().Int64(flagSinceName, flagSinceDefault, flagSinceDescription)
 
 	return nil
 }
@@ -111,40 +112,43 @@ func retrieveOperationTodosFindTodosLimitFlag(m *todos.FindTodosParams, cmdPrefi
 	retAdded := false
 	if cmd.Flags().Changed("limit") {
 
-		var limitFlagName string
+		var flagLimitName string
 		if cmdPrefix == "" {
-			limitFlagName = "limit"
+			flagLimitName = "limit"
 		} else {
-			limitFlagName = fmt.Sprintf("%v.limit", cmdPrefix)
+			flagLimitName = fmt.Sprintf("%v.limit", cmdPrefix)
 		}
 
-		limitFlagValue, err := cmd.Flags().GetInt32(limitFlagName)
+		flagLimitValue, err := cmd.Flags().GetInt32(flagLimitName)
 		if err != nil {
 			return err, false
 		}
-		m.Limit = &limitFlagValue
+		m.Limit = &flagLimitValue
 
 	}
+
 	return nil, retAdded
 }
+
 func retrieveOperationTodosFindTodosSinceFlag(m *todos.FindTodosParams, cmdPrefix string, cmd *cobra.Command) (error, bool) {
 	retAdded := false
 	if cmd.Flags().Changed("since") {
 
-		var sinceFlagName string
+		var flagSinceName string
 		if cmdPrefix == "" {
-			sinceFlagName = "since"
+			flagSinceName = "since"
 		} else {
-			sinceFlagName = fmt.Sprintf("%v.since", cmdPrefix)
+			flagSinceName = fmt.Sprintf("%v.since", cmdPrefix)
 		}
 
-		sinceFlagValue, err := cmd.Flags().GetInt64(sinceFlagName)
+		flagSinceValue, err := cmd.Flags().GetInt64(flagSinceName)
 		if err != nil {
 			return err, false
 		}
-		m.Since = &sinceFlagValue
+		m.Since = &flagSinceValue
 
 	}
+
 	return nil, retAdded
 }
 

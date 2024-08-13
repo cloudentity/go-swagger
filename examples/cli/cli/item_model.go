@@ -17,80 +17,80 @@ import (
 // register flags to command
 func registerModelItemFlags(depth int, cmdPrefix string, cmd *cobra.Command) error {
 
-	if err := registerItemCompleted(depth, cmdPrefix, cmd); err != nil {
+	if err := registerItemPropCompleted(depth, cmdPrefix, cmd); err != nil {
 		return err
 	}
 
-	if err := registerItemDescription(depth, cmdPrefix, cmd); err != nil {
+	if err := registerItemPropDescription(depth, cmdPrefix, cmd); err != nil {
 		return err
 	}
 
-	if err := registerItemID(depth, cmdPrefix, cmd); err != nil {
+	if err := registerItemPropID(depth, cmdPrefix, cmd); err != nil {
 		return err
 	}
 
 	return nil
 }
 
-func registerItemCompleted(depth int, cmdPrefix string, cmd *cobra.Command) error {
+func registerItemPropCompleted(depth int, cmdPrefix string, cmd *cobra.Command) error {
 	if depth > maxDepth {
 		return nil
 	}
 
-	completedDescription := ``
+	flagCompletedDescription := ``
 
-	var completedFlagName string
+	var flagCompletedName string
 	if cmdPrefix == "" {
-		completedFlagName = "completed"
+		flagCompletedName = "completed"
 	} else {
-		completedFlagName = fmt.Sprintf("%v.completed", cmdPrefix)
+		flagCompletedName = fmt.Sprintf("%v.completed", cmdPrefix)
 	}
 
-	var completedFlagDefault bool
+	var flagCompletedDefault bool
 
-	_ = cmd.PersistentFlags().Bool(completedFlagName, completedFlagDefault, completedDescription)
+	_ = cmd.PersistentFlags().Bool(flagCompletedName, flagCompletedDefault, flagCompletedDescription)
 
 	return nil
 }
 
-func registerItemDescription(depth int, cmdPrefix string, cmd *cobra.Command) error {
+func registerItemPropDescription(depth int, cmdPrefix string, cmd *cobra.Command) error {
 	if depth > maxDepth {
 		return nil
 	}
 
-	descriptionDescription := `Required. `
+	flagDescriptionDescription := `Required. `
 
-	var descriptionFlagName string
+	var flagDescriptionName string
 	if cmdPrefix == "" {
-		descriptionFlagName = "description"
+		flagDescriptionName = "description"
 	} else {
-		descriptionFlagName = fmt.Sprintf("%v.description", cmdPrefix)
+		flagDescriptionName = fmt.Sprintf("%v.description", cmdPrefix)
 	}
 
-	var descriptionFlagDefault string
+	var flagDescriptionDefault string
 
-	_ = cmd.PersistentFlags().String(descriptionFlagName, descriptionFlagDefault, descriptionDescription)
+	_ = cmd.PersistentFlags().String(flagDescriptionName, flagDescriptionDefault, flagDescriptionDescription)
 
 	return nil
 }
 
-func registerItemID(depth int, cmdPrefix string, cmd *cobra.Command) error {
+func registerItemPropID(depth int, cmdPrefix string, cmd *cobra.Command) error {
 	if depth > maxDepth {
 		return nil
 	}
 
-	idDescription := ``
+	flagIDDescription := ``
 
-	var idFlagName string
+	var flagIDName string
 	if cmdPrefix == "" {
-		idFlagName = "id"
+		flagIDName = "id"
 	} else {
-		idFlagName = fmt.Sprintf("%v.id", cmdPrefix)
+		flagIDName = fmt.Sprintf("%v.id", cmdPrefix)
 	}
 
-	var idFlagDefault int64
+	var flagIDDefault int64
 
-	_ = cmd.PersistentFlags().Int64(idFlagName, idFlagDefault, idDescription)
+	_ = cmd.PersistentFlags().Int64(flagIDName, flagIDDefault, flagIDDescription)
 
 	return nil
 }
@@ -99,48 +99,48 @@ func registerItemID(depth int, cmdPrefix string, cmd *cobra.Command) error {
 func retrieveModelItemFlags(depth int, m *models.Item, cmdPrefix string, cmd *cobra.Command) (error, bool) {
 	retAdded := false
 
-	err, completedAdded := retrieveItemCompletedFlags(depth, m, cmdPrefix, cmd)
+	err, CompletedAdded := retrieveItemPropCompletedFlags(depth, m, cmdPrefix, cmd)
 	if err != nil {
 		return err, false
 	}
-	retAdded = retAdded || completedAdded
+	retAdded = retAdded || CompletedAdded
 
-	err, descriptionAdded := retrieveItemDescriptionFlags(depth, m, cmdPrefix, cmd)
+	err, DescriptionAdded := retrieveItemPropDescriptionFlags(depth, m, cmdPrefix, cmd)
 	if err != nil {
 		return err, false
 	}
-	retAdded = retAdded || descriptionAdded
+	retAdded = retAdded || DescriptionAdded
 
-	err, idAdded := retrieveItemIDFlags(depth, m, cmdPrefix, cmd)
+	err, IDAdded := retrieveItemPropIDFlags(depth, m, cmdPrefix, cmd)
 	if err != nil {
 		return err, false
 	}
-	retAdded = retAdded || idAdded
+	retAdded = retAdded || IDAdded
 
 	return nil, retAdded
 }
 
-func retrieveItemCompletedFlags(depth int, m *models.Item, cmdPrefix string, cmd *cobra.Command) (error, bool) {
+func retrieveItemPropCompletedFlags(depth int, m *models.Item, cmdPrefix string, cmd *cobra.Command) (error, bool) {
 	if depth > maxDepth {
 		return nil, false
 	}
 	retAdded := false
 
-	completedFlagName := fmt.Sprintf("%v.completed", cmdPrefix)
-	if cmd.Flags().Changed(completedFlagName) {
+	flagCompletedName := fmt.Sprintf("%v.completed", cmdPrefix)
+	if cmd.Flags().Changed(flagCompletedName) {
 
-		var completedFlagName string
+		var flagCompletedName string
 		if cmdPrefix == "" {
-			completedFlagName = "completed"
+			flagCompletedName = "completed"
 		} else {
-			completedFlagName = fmt.Sprintf("%v.completed", cmdPrefix)
+			flagCompletedName = fmt.Sprintf("%v.completed", cmdPrefix)
 		}
 
-		completedFlagValue, err := cmd.Flags().GetBool(completedFlagName)
+		flagCompletedValue, err := cmd.Flags().GetBool(flagCompletedName)
 		if err != nil {
 			return err, false
 		}
-		m.Completed = completedFlagValue
+		m.Completed = flagCompletedValue
 
 		retAdded = true
 	}
@@ -148,27 +148,27 @@ func retrieveItemCompletedFlags(depth int, m *models.Item, cmdPrefix string, cmd
 	return nil, retAdded
 }
 
-func retrieveItemDescriptionFlags(depth int, m *models.Item, cmdPrefix string, cmd *cobra.Command) (error, bool) {
+func retrieveItemPropDescriptionFlags(depth int, m *models.Item, cmdPrefix string, cmd *cobra.Command) (error, bool) {
 	if depth > maxDepth {
 		return nil, false
 	}
 	retAdded := false
 
-	descriptionFlagName := fmt.Sprintf("%v.description", cmdPrefix)
-	if cmd.Flags().Changed(descriptionFlagName) {
+	flagDescriptionName := fmt.Sprintf("%v.description", cmdPrefix)
+	if cmd.Flags().Changed(flagDescriptionName) {
 
-		var descriptionFlagName string
+		var flagDescriptionName string
 		if cmdPrefix == "" {
-			descriptionFlagName = "description"
+			flagDescriptionName = "description"
 		} else {
-			descriptionFlagName = fmt.Sprintf("%v.description", cmdPrefix)
+			flagDescriptionName = fmt.Sprintf("%v.description", cmdPrefix)
 		}
 
-		descriptionFlagValue, err := cmd.Flags().GetString(descriptionFlagName)
+		flagDescriptionValue, err := cmd.Flags().GetString(flagDescriptionName)
 		if err != nil {
 			return err, false
 		}
-		m.Description = &descriptionFlagValue
+		m.Description = &flagDescriptionValue
 
 		retAdded = true
 	}
@@ -176,27 +176,27 @@ func retrieveItemDescriptionFlags(depth int, m *models.Item, cmdPrefix string, c
 	return nil, retAdded
 }
 
-func retrieveItemIDFlags(depth int, m *models.Item, cmdPrefix string, cmd *cobra.Command) (error, bool) {
+func retrieveItemPropIDFlags(depth int, m *models.Item, cmdPrefix string, cmd *cobra.Command) (error, bool) {
 	if depth > maxDepth {
 		return nil, false
 	}
 	retAdded := false
 
-	idFlagName := fmt.Sprintf("%v.id", cmdPrefix)
-	if cmd.Flags().Changed(idFlagName) {
+	flagIDName := fmt.Sprintf("%v.id", cmdPrefix)
+	if cmd.Flags().Changed(flagIDName) {
 
-		var idFlagName string
+		var flagIDName string
 		if cmdPrefix == "" {
-			idFlagName = "id"
+			flagIDName = "id"
 		} else {
-			idFlagName = fmt.Sprintf("%v.id", cmdPrefix)
+			flagIDName = fmt.Sprintf("%v.id", cmdPrefix)
 		}
 
-		idFlagValue, err := cmd.Flags().GetInt64(idFlagName)
+		flagIDValue, err := cmd.Flags().GetInt64(flagIDName)
 		if err != nil {
 			return err, false
 		}
-		m.ID = idFlagValue
+		m.ID = flagIDValue
 
 		retAdded = true
 	}

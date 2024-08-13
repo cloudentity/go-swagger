@@ -9,6 +9,7 @@ import (
 
 	"github.com/go-openapi/spec"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 // only used within this group of tests but never used within actual code base.
@@ -79,37 +80,36 @@ Sample code block:
 	var err error
 
 	st := &sectionedParser{}
-	st.setTitle = func(lines []string) {}
+	st.setTitle = func(_ []string) {}
 	err = st.Parse(ascg(text))
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	assert.EqualValues(t, []string{"This has a title, separated by a whitespace line"}, st.Title())
 	assert.EqualValues(t, []string{"In this example the punctuation for the title should not matter for swagger.", "For go it will still make a difference though."}, st.Description())
 
 	st = &sectionedParser{}
-	st.setTitle = func(lines []string) {}
+	st.setTitle = func(_ []string) {}
 	err = st.Parse(ascg(text2))
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	assert.EqualValues(t, []string{"This has a title without whitespace."}, st.Title())
 	assert.EqualValues(t, []string{"The punctuation here does indeed matter. But it won't for go."}, st.Description())
 
 	st = &sectionedParser{}
-	st.setTitle = func(lines []string) {}
+	st.setTitle = func(_ []string) {}
 	err = st.Parse(ascg(text3))
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	assert.EqualValues(t, []string{"This has a title, and markdown in the description"}, st.Title())
 	assert.EqualValues(t, []string{"See how markdown works now, we can have lists:", "", "+ first item", "+ second item", "+ third item", "", "[Links works too](http://localhost)"}, st.Description())
 
 	st = &sectionedParser{}
-	st.setTitle = func(lines []string) {}
+	st.setTitle = func(_ []string) {}
 	err = st.Parse(ascg(text4))
-	assert.NoError(t, err)
+	require.NoError(t, err)
 
 	assert.EqualValues(t, []string{"This has whitespace sensitive markdown in the description"}, st.Title())
 	assert.EqualValues(t, []string{"+ first item", "    + nested item", "    + also nested item", "", "Sample code block:", "", "    fmt.Println(\"Hello World!\")"}, st.Description())
-
 }
 
 func dummyBuilder() schemaValidations {
@@ -132,7 +132,7 @@ maximum: 20
 	var err error
 
 	st := &sectionedParser{}
-	st.setTitle = func(lines []string) {}
+	st.setTitle = func(_ []string) {}
 	st.taggers = []tagParser{
 		{"Maximum", false, false, nil, &setMaximum{dummyBuilder(), regexp.MustCompile(fmt.Sprintf(rxMaximumFmt, ""))}},
 		{"Minimum", false, false, nil, &setMinimum{dummyBuilder(), regexp.MustCompile(fmt.Sprintf(rxMinimumFmt, ""))}},
@@ -140,7 +140,7 @@ maximum: 20
 	}
 
 	err = st.Parse(ascg(block))
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	assert.EqualValues(t, []string{"This has a title without whitespace."}, st.Title())
 	assert.EqualValues(t, []string{"The punctuation here does indeed matter. But it won't for go."}, st.Description())
 	assert.Len(t, st.matched, 2)
@@ -150,7 +150,7 @@ maximum: 20
 	assert.True(t, ok)
 
 	st = &sectionedParser{}
-	st.setTitle = func(lines []string) {}
+	st.setTitle = func(_ []string) {}
 	st.taggers = []tagParser{
 		{"Maximum", false, false, nil, &setMaximum{dummyBuilder(), regexp.MustCompile(fmt.Sprintf(rxMaximumFmt, ""))}},
 		{"Minimum", false, false, nil, &setMinimum{dummyBuilder(), regexp.MustCompile(fmt.Sprintf(rxMinimumFmt, ""))}},
@@ -158,7 +158,7 @@ maximum: 20
 	}
 
 	err = st.Parse(ascg(block2))
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	assert.EqualValues(t, []string{"This has a title without whitespace."}, st.Title())
 	assert.EqualValues(t, []string{"The punctuation here does indeed matter. But it won't for go."}, st.Description())
 	assert.Len(t, st.matched, 2)
@@ -174,13 +174,13 @@ func TestSectionedParser_Empty(t *testing.T) {
 	var err error
 
 	st := &sectionedParser{}
-	st.setTitle = func(lines []string) {}
+	st.setTitle = func(_ []string) {}
 	ap := newSchemaAnnotationParser("SomeResponse")
 	ap.rx = rxResponseOverride
 	st.annotation = ap
 
 	err = st.Parse(ascg(block))
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	assert.Empty(t, st.Title())
 	assert.Empty(t, st.Description())
 	assert.Empty(t, st.taggers)
@@ -200,7 +200,7 @@ maximum: 20
 	var err error
 
 	st := &sectionedParser{}
-	st.setTitle = func(lines []string) {}
+	st.setTitle = func(_ []string) {}
 	ap := newSchemaAnnotationParser("SomeModel")
 	st.annotation = ap
 	st.taggers = []tagParser{
@@ -210,7 +210,7 @@ maximum: 20
 	}
 
 	err = st.Parse(ascg(block))
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	assert.EqualValues(t, []string{"This has a title without whitespace."}, st.Title())
 	assert.EqualValues(t, []string{"The punctuation here does indeed matter. But it won't for go."}, st.Description())
 	assert.Len(t, st.matched, 2)
@@ -235,7 +235,7 @@ maximum: 20
 	var err error
 
 	st := &sectionedParser{}
-	st.setTitle = func(lines []string) {}
+	st.setTitle = func(_ []string) {}
 	ap := newSchemaAnnotationParser("SomeModel")
 	st.annotation = ap
 	st.taggers = []tagParser{
@@ -245,7 +245,7 @@ maximum: 20
 	}
 
 	err = st.Parse(ascg(block))
-	assert.NoError(t, err)
+	require.NoError(t, err)
 	assert.EqualValues(t, []string{"This has a title without whitespace."}, st.Title())
 	assert.EqualValues(t, []string{"The punctuation here does indeed matter. But it won't for go."}, st.Description())
 	assert.Len(t, st.matched, 1)
@@ -268,7 +268,7 @@ func ascg(txt string) *ast.CommentGroup {
 }
 
 func TestShouldAcceptTag(t *testing.T) {
-	var tagTests = []struct {
+	tagTests := []struct {
 		tags        []string
 		includeTags map[string]bool
 		excludeTags map[string]bool
@@ -285,7 +285,7 @@ func TestShouldAcceptTag(t *testing.T) {
 }
 
 func TestShouldAcceptPkg(t *testing.T) {
-	var pkgTests = []struct {
+	pkgTests := []struct {
 		path        string
 		includePkgs []string
 		excludePkgs []string

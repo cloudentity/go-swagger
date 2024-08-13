@@ -23,7 +23,7 @@ type contextKey string
 
 const AuthKey contextKey = "Auth"
 
-//go:generate mockery -name PetAPI -inpkg
+//go:generate mockery --name PetAPI --inpackage
 
 /* PetAPI  */
 type PetAPI interface {
@@ -46,7 +46,7 @@ type PetAPI interface {
 	PetUploadImage(ctx context.Context, params pet.PetUploadImageParams) middleware.Responder
 }
 
-//go:generate mockery -name StoreAPI -inpkg
+//go:generate mockery --name StoreAPI --inpackage
 
 /* StoreAPI  */
 type StoreAPI interface {
@@ -85,6 +85,9 @@ type Config struct {
 	BasicAuthenticator func(security.UserPassAuthentication) runtime.Authenticator
 	// Authenticator to use for all Basic authentication
 	BearerAuthenticator func(string, security.ScopedTokenAuthentication) runtime.Authenticator
+
+	// JSONConsumer is a json consumer that will replace the default if not nil.
+	JSONConsumer runtime.Consumer
 }
 
 // Handler returns an http.Handler given the handler configuration
@@ -116,7 +119,11 @@ func HandlerAPI(c Config) (http.Handler, *operations.PetstoreAPI, error) {
 		api.BearerAuthenticator = c.BearerAuthenticator
 	}
 
-	api.JSONConsumer = runtime.JSONConsumer()
+	if c.JSONConsumer != nil {
+		api.JSONConsumer = c.JSONConsumer
+	} else {
+		api.JSONConsumer = runtime.JSONConsumer()
+	}
 	api.JSONProducer = runtime.JSONProducer()
 	api.RolesAuth = func(token string) (interface{}, error) {
 		if c.AuthRoles == nil {

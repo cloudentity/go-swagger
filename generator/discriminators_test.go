@@ -49,6 +49,8 @@ func TestGenerateModel_DiscriminatorSlices(t *testing.T) {
 }
 
 func TestGenerateModel_Discriminators(t *testing.T) {
+	defer discardOutput()()
+
 	specDoc, e := loads.Spec("../fixtures/codegen/todolist.discriminators.yml")
 	require.NoError(t, e)
 
@@ -111,7 +113,7 @@ func TestGenerateModel_Discriminators(t *testing.T) {
 	assert.True(t, genModel.IsComplexObject)
 	assert.Equal(t, "petType", genModel.DiscriminatorField)
 	assert.Len(t, genModel.Discriminates, 3)
-	assert.Len(t, genModel.ExtraSchemas, 0)
+	assert.Empty(t, genModel.ExtraSchemas)
 	assert.Equal(t, "Pet", genModel.Discriminates["Pet"])
 	assert.Equal(t, "Cat", genModel.Discriminates["cat"])
 	assert.Equal(t, "Dog", genModel.Discriminates["Dog"])
@@ -141,6 +143,8 @@ func TestGenerateModel_Discriminators(t *testing.T) {
 }
 
 func TestGenerateModel_UsesDiscriminator(t *testing.T) {
+	defer discardOutput()()
+
 	specDoc, err := loads.Spec("../fixtures/codegen/todolist.discriminators.yml")
 	require.NoError(t, err)
 
@@ -168,6 +172,8 @@ func TestGenerateModel_UsesDiscriminator(t *testing.T) {
 }
 
 func TestGenerateClient_OKResponseWithDiscriminator(t *testing.T) {
+	defer discardOutput()()
+
 	specDoc, err := loads.Spec("../fixtures/codegen/todolist.discriminators.yml")
 	require.NoError(t, err)
 
@@ -184,6 +190,7 @@ func TestGenerateClient_OKResponseWithDiscriminator(t *testing.T) {
 		Principal:     "",
 		Target:        ".",
 		Doc:           specDoc,
+		PristineDefs:  specDoc.Pristine(),
 		Analyzed:      analysis.New(specDoc.Spec()),
 		Operation:     *op,
 		Authed:        false,
@@ -207,6 +214,8 @@ func TestGenerateClient_OKResponseWithDiscriminator(t *testing.T) {
 }
 
 func TestGenerateServer_Parameters(t *testing.T) {
+	defer discardOutput()()
+
 	specDoc, err := loads.Spec("../fixtures/codegen/todolist.discriminators.yml")
 	require.NoError(t, err)
 
@@ -245,6 +254,8 @@ func TestGenerateServer_Parameters(t *testing.T) {
 }
 
 func TestGenerateModel_Discriminator_Billforward(t *testing.T) {
+	defer discardOutput()()
+
 	specDoc, err := loads.Spec("../fixtures/codegen/billforward.discriminators.yml")
 	require.NoError(t, err)
 
@@ -268,6 +279,8 @@ func TestGenerateModel_Discriminator_Billforward(t *testing.T) {
 }
 
 func TestGenerateModel_Bitbucket_Repository(t *testing.T) {
+	defer discardOutput()()
+
 	specDoc, err := loads.Spec("../fixtures/codegen/bitbucket.json")
 	require.NoError(t, err)
 
@@ -300,6 +313,8 @@ func TestGenerateModel_Bitbucket_Repository(t *testing.T) {
 }
 
 func TestGenerateModel_Bitbucket_WebhookSubscription(t *testing.T) {
+	defer discardOutput()()
+
 	specDoc, err := loads.Spec("../fixtures/codegen/bitbucket.json")
 	require.NoError(t, err)
 
@@ -323,6 +338,8 @@ func TestGenerateModel_Bitbucket_WebhookSubscription(t *testing.T) {
 }
 
 func TestGenerateModel_Issue319(t *testing.T) {
+	defer discardOutput()()
+
 	specDoc, err := loads.Spec("../fixtures/bugs/319/swagger.yml")
 	require.NoError(t, err)
 
@@ -346,6 +363,8 @@ func TestGenerateModel_Issue319(t *testing.T) {
 }
 
 func TestGenerateModel_Issue541(t *testing.T) {
+	defer discardOutput()()
+
 	specDoc, err := loads.Spec("../fixtures/bugs/541/swagger.json")
 	require.NoError(t, err)
 
@@ -370,6 +389,8 @@ func TestGenerateModel_Issue541(t *testing.T) {
 }
 
 func TestGenerateModel_Issue436(t *testing.T) {
+	defer discardOutput()()
+
 	specDoc, err := loads.Spec("../fixtures/bugs/436/swagger.yml")
 	require.NoError(t, err)
 
@@ -397,6 +418,8 @@ func TestGenerateModel_Issue436(t *testing.T) {
 }
 
 func TestGenerateModel_Issue740(t *testing.T) {
+	defer discardOutput()()
+
 	specDoc, err := loads.Spec("../fixtures/bugs/740/swagger.yml")
 	require.NoError(t, err)
 
@@ -421,6 +444,8 @@ func TestGenerateModel_Issue740(t *testing.T) {
 }
 
 func TestGenerateModel_Issue743(t *testing.T) {
+	defer discardOutput()()
+
 	specDoc, err := loads.Spec("../fixtures/bugs/743/swagger.yml")
 	require.NoError(t, err)
 

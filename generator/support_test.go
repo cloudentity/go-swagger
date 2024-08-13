@@ -95,7 +95,6 @@ func TestCheckPrefixFetchRelPath(t *testing.T) {
 }
 
 func TestBaseImport(t *testing.T) {
-
 	// 1. Create a root folder /tmp/root
 	// 2. Simulate scenario
 	//	2.a No Symlink
@@ -103,16 +102,7 @@ func TestBaseImport(t *testing.T) {
 	//  2.c Symlink from inside of GOPATH to outside.
 	// 3. Check results.
 
-	oldgopath := os.Getenv("GOPATH")
-	defer func() {
-		_ = os.Setenv("GOPATH", oldgopath)
-	}()
-
-	tempdir, err := os.MkdirTemp("", "test-baseimport")
-	require.NoError(t, err)
-	defer func() {
-		_ = os.RemoveAll(tempdir)
-	}()
+	tempdir := t.TempDir()
 
 	golang := GoLangOpts()
 
@@ -121,7 +111,7 @@ func TestBaseImport(t *testing.T) {
 
 		// Create Paths
 		for _, paths := range item.path {
-			require.NoError(t, os.MkdirAll(paths, 0700))
+			require.NoError(t, os.MkdirAll(paths, 0o700))
 		}
 
 		if item.symlinksrc == "" {
@@ -130,13 +120,13 @@ func TestBaseImport(t *testing.T) {
 
 		// Create Symlink
 		require.NoErrorf(t, os.Symlink(item.symlinkdest, item.symlinksrc),
-			"WARNING:TestBaseImport with symlink could not be carried on. Symlink creation failed for %s -> %s: %v\n%s",
-			item.symlinksrc, item.symlinkdest, err,
+			"WARNING:TestBaseImport with symlink could not be carried on. Symlink creation failed for %s -> %s\n%s",
+			item.symlinksrc, item.symlinkdest,
 			"NOTE:TestBaseImport with symlink on Windows requires extended privileges (admin or a user with SeCreateSymbolicLinkPrivilege)",
 		)
 
 		// Change GOPATH
-		_ = os.Setenv("GOPATH", item.gopath)
+		t.Setenv("GOPATH", item.gopath)
 
 		// Test (baseImport always with /)
 		actualpath := golang.baseImport(item.targetpath)
@@ -150,27 +140,43 @@ func TestBaseImport(t *testing.T) {
 func TestGenerateMarkdown(t *testing.T) {
 	defer discardOutput()()
 
-	tempdir, err := os.MkdirTemp("", "test-markdown")
-	require.NoError(t, err)
-	defer func() {
-		_ = os.RemoveAll(tempdir)
-	}()
+	t.Run("should generate doc for demo fixture", func(t *testing.T) {
+		opts := testGenOpts()
+		opts.Spec = "../fixtures/enhancements/184/fixture-184.yaml"
+		output := filepath.Join(t.TempDir(), "markdown.md")
 
-	opts := testGenOpts()
-	opts.Spec = "../fixtures/enhancements/184/fixture-184.yaml"
-	output := filepath.Join(tempdir, "markdown.md")
-
-	require.NoError(t, GenerateMarkdown(output, nil, nil, opts))
-	expectedCode := []string{
-		"# Markdown generator demo",
-	}
-
-	code, err := os.ReadFile(output)
-	require.NoError(t, err)
-
-	for line, codeLine := range expectedCode {
-		if !assertInCode(t, strings.TrimSpace(codeLine), string(code)) {
-			t.Logf("Code expected did not match in codegenfile %s for expected line %d: %q", output, line, expectedCode[line])
+		require.NoError(t, GenerateMarkdown(output, nil, nil, opts))
+		expectedCode := []string{
+			"# Markdown generator demo",
 		}
-	}
+
+		code, err := os.ReadFile(output)
+		require.NoError(t, err)
+
+		for line, codeLine := range expectedCode {
+			if !assertInCode(t, strings.TrimSpace(codeLine), string(code)) {
+				t.Logf("Code expected did not match in codegenfile %s for expected line %d: %q", output, line, expectedCode[line])
+			}
+		}
+	})
+
+	t.Run("should handle new lines in descriptions", func(t *testing.T) {
+		opts := testGenOpts()
+		opts.Spec = "../fixtures/bugs/2700/2700.yaml"
+		output := filepath.Join(t.TempDir(), "markdown.md")
+
+		require.NoError(t, GenerateMarkdown(output, nil, nil, opts))
+		expectedCode := []string{
+			`| Filesystem type of the volume that you want to mount.</br>Tip: Ensure that the filesystem type is supported by the host operating system.</br>Examples: "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified.</br>More info: https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore</br></br>TODO: how do we prevent errors in the filesystem from compromising the machine |`,
+		}
+
+		code, err := os.ReadFile(output)
+		require.NoError(t, err)
+
+		for line, codeLine := range expectedCode {
+			if !assertInCode(t, strings.TrimSpace(codeLine), string(code)) {
+				t.Logf("Code expected did not match in codegenfile %s for expected line %d: %q", output, line, expectedCode[line])
+			}
+		}
+	})
 }
