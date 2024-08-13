@@ -6,7 +6,7 @@ description: Contributing guide
 bookCollapseSection: true
 weight: 40
 ---
-{{<forkme url="https://github.com/go-swagger/go-swagger/fork">}}
+{{<forkme url="https://github.com/cloudentity/go-swagger/fork">}}
 
 # How to contribute?
 

@@ -4,13 +4,13 @@ date: 2023-01-01T01:01:01-08:00
 draft: true
 weight: 1
 ---
-{{<forkme url="https://github.com/go-swagger/go-swagger/fork">}}
+{{<forkme url="https://github.com/cloudentity/go-swagger/fork">}}
 
 {{< hint "info" >}}
 {{< param goswagger.versionMessage >}}
 {{< /hint >}}
 
-# Swagger 2.0 [![Run CI](https://github.com/go-swagger/go-swagger/actions/workflows/test.yaml/badge.svg)](https://github.com/go-swagger/go-swagger/actions/workflows/test.yaml) [![codecov](https://codecov.io/gh/go-swagger/go-swagger/branch/master/graph/badge.svg)](https://codecov.io/gh/go-swagger/go-swagger)[![Go Report Card](https://goreportcard.com/badge/github.com/go-swagger/go-swagger)](https://goreportcard.com/report/github.com/go-swagger/go-swagger)
+# Swagger 2.0 [![Run CI](https://github.com/cloudentity/go-swagger/actions/workflows/test.yaml/badge.svg)](https://github.com/cloudentity/go-swagger/actions/workflows/test.yaml) [![codecov](https://codecov.io/gh/go-swagger/go-swagger/branch/master/graph/badge.svg)](https://codecov.io/gh/go-swagger/go-swagger)[![Go Report Card](https://goreportcard.com/badge/github.com/go-swagger/go-swagger)](https://goreportcard.com/report/github.com/go-swagger/go-swagger)
 
 [![GitHub version](https://badge.fury.io/gh/go-swagger%2Fgo-swagger.svg)](https://badge.fury.io/gh/go-swagger%2Fgo-swagger) [![Docker Repository on Quay](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fquay.io%2Fapi%2Fv1%2Frepository%2Fgoswagger%2Fswagger%2Ftag%2F%3Flimit%3D1%26onlyActiveTags%3Dtrue%26filter_tag_name%3Dlike%3Av&label=Docker%20Repository%20on%20Quay&query=%24.tags[:1].name)](https://quay.io/repository/goswagger/swagger?tab=tags) [![Docker Repository on Github](https://ghcr-badge.egpl.dev/go-swagger/go-swagger/latest_tag?trim=major&ignore=sha-*&label=Docker%20Repository%20on%20Github)](https://github.com/orgs/go-swagger/packages/container/go-swagger/versions) ![GitHub commits since latest release](https://img.shields.io/github/commits-since/go-swagger/go-swagger/latest)
 
@@ -18,7 +18,7 @@ weight: 1
 [![license](http://img.shields.io/badge/license-Apache%20v2-orange.svg)](https://raw.githubusercontent.com/swagger-api/swagger-spec/master/LICENSE)
 [![GoDoc](https://godoc.org/github.com/go-swagger/go-swagger?status.svg)](http://godoc.org/github.com/go-swagger/go-swagger)
 
-[![Open SSF Scorecard](https://api.securityscorecards.dev/projects/github.com/go-swagger/go-swagger/badge)](https://securityscorecards.dev/viewer/?uri=github.com/go-swagger/go-swagger)
+[![Open SSF Scorecard](https://api.securityscorecards.dev/projects/github.com/cloudentity/go-swagger/badge)](https://securityscorecards.dev/viewer/?uri=github.com/go-swagger/go-swagger)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fgo-swagger%2Fgo-swagger.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fgo-swagger%2Fgo-swagger?ref=badge_shield)
 
 ---
@@ -142,7 +142,7 @@ To generate a [client for a swagger spec](generate/client.md) document:
 swagger generate client [-f ./swagger.json] -A [application-name [--principal [principal-name]]
 ```
 ### Generate an CLI (Command line tool)
-To generate a [CLI for a swagger spec](https://github.com/go-swagger/go-swagger/tree/master/examples/cli) document:
+To generate a [CLI for a swagger spec](https://github.com/cloudentity/go-swagger/tree/master/examples/cli) document:
 ```
 swagger generate cli [-f ./swagger.json] -A [application-name [--principal [principal-name]]
 ```
@@ -282,8 +282,8 @@ Spec flattening and $ref resolution brought breaking changes in model generation
 You will have to rename some imports:
 
 ```
-github.com/go-swagger/go-swagger/httpkit/validate to github.com/go-openapi/validate
-github.com/go-swagger/go-swagger/httpkit to github.com/go-openapi/runtime
+github.com/cloudentity/go-swagger/httpkit/validate to github.com/go-openapi/validate
+github.com/cloudentity/go-swagger/httpkit to github.com/go-openapi/runtime
 github.com/naoina/denco to github.com/go-openapi/runtime/middleware/denco
 github.com/go-swagger/go-swagger to github.com/go-openapi
 ```

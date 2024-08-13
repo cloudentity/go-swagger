@@ -7,8 +7,8 @@ import (
 	"os"
 
 	"github.com/go-openapi/loads"
-	"github.com/go-swagger/go-swagger/examples/todo-list-strict/restapi"
-	"github.com/go-swagger/go-swagger/examples/todo-list-strict/restapi/operations"
+	"github.com/cloudentity/go-swagger/examples/todo-list-strict/restapi"
+	"github.com/cloudentity/go-swagger/examples/todo-list-strict/restapi/operations"
 	flags "github.com/jessevdk/go-flags"
 )
 

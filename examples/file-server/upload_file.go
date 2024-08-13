@@ -7,9 +7,9 @@ import (
 	"log"
 	"os"
 
+	"github.com/cloudentity/go-swagger/examples/file-server/client"
+	"github.com/cloudentity/go-swagger/examples/file-server/client/uploads"
 	"github.com/go-openapi/runtime"
-	"github.com/go-swagger/go-swagger/examples/file-server/client"
-	"github.com/go-swagger/go-swagger/examples/file-server/client/uploads"
 )
 
 func main() {

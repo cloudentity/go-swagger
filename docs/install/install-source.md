@@ -11,14 +11,14 @@ description: Installation instructions for go-swagger, from source
 If you have `go` version `{{< param goswagger.goVersion >}}` or greater installed, `go-swagger` can be installed by running:
 
 ```sh
-go install github.com/go-swagger/go-swagger/cmd/swagger@latest
+go install github.com/cloudentity/go-swagger/cmd/swagger@latest
 ```
 
 ## Alternative methods
 
 #### Using a released source tarball
 
-[![GitHub Downloads (all assets, latest release)](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fapi.github.com%2Frepos%2Fgo-swagger%2Fgo-swagger%2Freleases%2Flatest&label=Latest%20tarball&query=%24.tarball_url)](https://github.com/go-swagger/go-swagger/releases/latest)
+[![GitHub Downloads (all assets, latest release)](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fapi.github.com%2Frepos%2Fgo-swagger%2Fgo-swagger%2Freleases%2Flatest&label=Latest%20tarball&query=%24.tarball_url)](https://github.com/cloudentity/go-swagger/releases/latest)
 
 ```sh
 dir=$(mktemp -d) 
@@ -50,5 +50,5 @@ dir=$(mktemp -d)
 git clone https://github.com/go-swagger/go-swagger "$dir" 
 cd "$dir"
 git checkout {{< param goswagger.latestRelease >}}
-go install -ldflags "-X github.com/go-swagger/go-swagger/cmd/swagger/commands.Version=$(git describe --tags) -X github.com/go-swagger/go-swagger/cmd/swagger/commands.Commit=$(git rev-parse HEAD)" ./cmd/swagger
+go install -ldflags "-X github.com/cloudentity/go-swagger/cmd/swagger/commands.Version=$(git describe --tags) -X github.com/cloudentity/go-swagger/cmd/swagger/commands.Commit=$(git rev-parse HEAD)" ./cmd/swagger
 ```

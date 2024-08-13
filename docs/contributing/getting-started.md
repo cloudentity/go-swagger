@@ -23,7 +23,7 @@ git clone https://github.com/go-swagger/go-swagger
 
 Building and installing go-swagger from source on your system:
 ```sh
-go install github.com/go-swagger/go-swagger/cmd/swagger@latest
+go install github.com/cloudentity/go-swagger/cmd/swagger@latest
 
 swagger version
 dev
