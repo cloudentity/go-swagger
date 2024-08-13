@@ -38,7 +38,7 @@ Install or update from current source master:
 
 ```sh
 dir=$(mktemp -d) 
-git clone https://github.com/go-swagger/go-swagger "$dir" 
+git clone https://github.com/cloudentity/go-swagger "$dir" 
 cd "$dir"
 go install ./cmd/swagger
 ```
@@ -47,7 +47,7 @@ To install a specific version from source an appropriate tag needs to be checked
 
 ```sh
 dir=$(mktemp -d)
-git clone https://github.com/go-swagger/go-swagger "$dir" 
+git clone https://github.com/cloudentity/go-swagger "$dir" 
 cd "$dir"
 git checkout {{< param goswagger.latestRelease >}}
 go install -ldflags "-X github.com/cloudentity/go-swagger/cmd/swagger/commands.Version=$(git describe --tags) -X github.com/cloudentity/go-swagger/cmd/swagger/commands.Commit=$(git rev-parse HEAD)" ./cmd/swagger

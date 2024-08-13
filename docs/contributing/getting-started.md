@@ -18,7 +18,7 @@ You may develop on Linux, MacOS or Windows.
 ```sh
 mkdir -p $GOPATH/src/github.com/go-swagger
 cd $GOPATH/src/github.com/go-swagger
-git clone https://github.com/go-swagger/go-swagger
+git clone https://github.com/cloudentity/go-swagger
 ```
 
 Building and installing go-swagger from source on your system:
