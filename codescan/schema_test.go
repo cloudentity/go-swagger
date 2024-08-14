@@ -670,7 +670,7 @@ func TestInterfaceField(t *testing.T) {
 	require.NoError(t, prs.Build(models))
 
 	schema := models["Interfaced"]
-	assertProperty(t, &schema, "", "custom_data", "", "CustomData")
+	assertProperty(t, &schema, "object", "custom_data", "", "CustomData")
 }
 
 func TestAliasedTypes(t *testing.T) {
@@ -951,7 +951,7 @@ func TestInterfaceDiscriminators(t *testing.T) {
 			assert.Equal(t, "#/definitions/TeslaCar", sch.Ref.String())
 		}
 
-		assertProperty(t, &schema, "object", "custom_data", "", "CustomData")
+		assertProperty(t, &schema, "integer", "doors", "int64", "Doors")
 	}
 }
 

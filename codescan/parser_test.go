@@ -110,7 +110,6 @@ Sample code block:
 
 	assert.EqualValues(t, []string{"This has whitespace sensitive markdown in the description"}, st.Title())
 	assert.EqualValues(t, []string{"+ first item", "    + nested item", "    + also nested item", "", "Sample code block:", "", "    fmt.Println(\"Hello World!\")"}, st.Description())
-
 }
 
 func dummyBuilder() schemaValidations {
