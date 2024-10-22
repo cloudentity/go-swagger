@@ -153,13 +153,30 @@ DECLS:
 }
 
 func (s *schemaBuilder) Build(definitions map[string]spec.Schema) error {
+	var (
+		goPackageExisting     string
+		packageExistsExisting bool
+	)
 	s.inferNames()
 
-	schema := definitions[s.Name]
+	schema, exists := definitions[s.Name]
+	if exists {
+		goPackageExisting, packageExistsExisting = schema.Extensions.GetString("x-go-package")
+	}
+
 	err := s.buildFromDecl(s.decl, &schema)
 	if err != nil {
 		return err
 	}
+
+	if exists {
+		goPackage, packageExists := schema.Extensions.GetString("x-go-package")
+
+		if packageExists && packageExistsExisting && goPackage != goPackageExisting {
+			return fmt.Errorf("schema name %s (go-package: %s vs %s) already exists", s.Name, goPackage, goPackageExisting)
+		}
+	}
+
 	definitions[s.Name] = schema
 	return nil
 }
