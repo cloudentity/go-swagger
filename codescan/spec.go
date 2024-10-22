@@ -89,8 +89,13 @@ func (s *specBuilder) buildDiscovered() error {
 		var queue []*entityDecl
 		for _, d := range s.discovered {
 			nm, _ := d.Names()
-			if _, ok := s.definitions[nm]; !ok {
+			if def, ok := s.definitions[nm]; !ok {
 				queue = append(queue, d)
+			} else {
+				pkgName, isSet := def.Extensions.GetString("x-go-package")
+				if isSet && d.Pkg.ID != pkgName {
+					queue = append(queue, d)
+				}
 			}
 		}
 		s.discovered = nil
