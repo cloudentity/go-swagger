@@ -16,6 +16,7 @@ import (
 	"golang.org/x/tools/go/ast/astutil"
 
 	"github.com/go-openapi/spec"
+	"github.com/go-openapi/swag"
 )
 
 func addExtension(ve *spec.VendorExtensible, key string, value interface{}) {
@@ -154,17 +155,22 @@ DECLS:
 
 func (s *schemaBuilder) Build(definitions map[string]spec.Schema) error {
 	var (
-		goPackageExisting     string
-		packageExistsExisting bool
+		goPackageExisting           string
+		packageExistsExisting       bool
+		jsonSchemaWithoutExtensions string
+		err                         error
 	)
 	s.inferNames()
 
 	schema, exists := definitions[s.Name]
 	if exists {
 		goPackageExisting, packageExistsExisting = schema.Extensions.GetString("x-go-package")
+		if jsonSchemaWithoutExtensions, err = s.makeJSONFromSchemaWithoutExtensions(schema); err != nil {
+			return err
+		}
 	}
 
-	err := s.buildFromDecl(s.decl, &schema)
+	err = s.buildFromDecl(s.decl, &schema)
 	if err != nil {
 		return err
 	}
@@ -173,12 +179,45 @@ func (s *schemaBuilder) Build(definitions map[string]spec.Schema) error {
 		goPackage, packageExists := schema.Extensions.GetString("x-go-package")
 
 		if packageExists && packageExistsExisting && goPackage != goPackageExisting {
-			return fmt.Errorf("schema name %s (go-package: %s vs %s) already exists", s.Name, goPackage, goPackageExisting)
+			if jsonSchemaWithoutExtensionsExisting, err := s.makeJSONFromSchemaWithoutExtensions(schema); err != nil {
+				return err
+			} else if jsonSchemaWithoutExtensions != jsonSchemaWithoutExtensionsExisting {
+				return fmt.Errorf("schema name %s (go-package: %s vs %s) already exists", s.Name, goPackage, goPackageExisting)
+			}
 		}
 	}
 
 	definitions[s.Name] = schema
 	return nil
+}
+
+func (s *schemaBuilder) makeJSONFromSchemaWithoutExtensions(schema spec.Schema) (string, error) {
+	b1, err := json.Marshal(schema.SchemaProps)
+	if err != nil {
+		return "", fmt.Errorf("schema props %v", err)
+	}
+	b2, err := schema.Ref.MarshalJSON()
+	if err != nil {
+		return "", fmt.Errorf("ref prop %v", err)
+	}
+	b3, err := schema.Schema.MarshalJSON()
+	if err != nil {
+		return "", fmt.Errorf("schema prop %v", err)
+	}
+	b4, err := json.Marshal(schema.SwaggerSchemaProps)
+	if err != nil {
+		return "", fmt.Errorf("common validations %v", err)
+	}
+	var b5 []byte
+	if schema.ExtraProps != nil {
+		jj, err := json.Marshal(schema.ExtraProps)
+		if err != nil {
+			return "", fmt.Errorf("extra props %v", err)
+		}
+		b5 = jj
+	}
+
+	return string(swag.ConcatJSON(b1, b2, b3, b4, b5)), nil
 }
 
 func (s *schemaBuilder) buildFromDecl(_ *entityDecl, schema *spec.Schema) error {
