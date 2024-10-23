@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"go/ast"
 	"go/types"
+	"os"
 	"strings"
 
 	"golang.org/x/tools/go/ast/astutil"
@@ -382,7 +383,7 @@ func (p *parameterBuilder) buildFromStruct(decl *entityDecl, tpe *types.Struct, 
 		sp.setDescription = func(lines []string) {
 			ps.Description = joinDropLast(lines)
 			enumDesc := getEnumDesc(ps.Extensions)
-			if enumDesc != "" {
+			if enumDesc != "" && os.Getenv("SWAGGER_GENERATE_OMIT_ENUM_DESCRIPTION_IN_DESCRIPTIONS") != "true" {
 				ps.Description += "\n" + enumDesc
 			}
 		}
