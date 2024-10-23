@@ -188,7 +188,7 @@ func (s *schemaBuilder) buildFromDecl(_ *entityDecl, schema *spec.Schema) error 
 	sp.setDescription = func(lines []string) {
 		schema.Description = joinDropLast(lines)
 		enumDesc := getEnumDesc(schema.VendorExtensible.Extensions)
-		if enumDesc != "" {
+		if enumDesc != "" && os.Getenv("SWAGGER_GENERATE_OMIT_ENUM_DESCRIPTION_IN_SCHEMA_DESCRIPTION") != "true" {
 			schema.Description += "\n" + enumDesc
 		}
 	}
